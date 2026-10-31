@@ -9,12 +9,13 @@ As of 2026-10-31, Apple Silicon macOS, Ruby 4.0.5, `turso_libsql` 0.2.0, bundled
 - Sequel upstream at `75b425dd1c1f34908426dd70371d14e4afb9c933`: SQLite adapter plus integration run passes (901 tests, six upstream skips). The test sources are unmodified. Some additional groups are never defined for an external adapter: seven SQLite type-conversion cases gated on `adapter_scheme == :sqlite` now have local equivalents. See [the coverage review](testing-review.md).
 - Real native HTTP execution against the official Hrana v3 Python fixture covers prepared Unicode/blob values, affected counts, inserted IDs, constraints, transactions/savepoints, reconnect, schema metadata, empty results, NULL values, models using prepared statements, and INSERT/UPDATE/DELETE RETURNING.
 - The fixture wrapper only normalizes padded/unpadded base64 between Python and Rust. SQL and stream handling stay upstream. This is a protocol integration test, not a hosted Turso test.
+- Hosted Turso remote mode was verified with a `turso://` URL normalized to HTTPS and a real database token, using Sequel 5.109.0. The warning-enabled `test/remote.rb` suite passed all five tests (24 assertions), covering CRUD, prepared bindings, Unicode/blobs, constraints, transactions/savepoints/rollback, reconnect persistence, schema metadata, models, and returning writes. Only randomly named test tables were created and dropped; credentials were not logged.
 
 Exact counts and commands are recorded in the local ignored continuation notes and test logs.
 
 ## Not verified
 
-Hosted Turso credentials/TLS, live embedded replication, sync scheduling/read-your-writes behavior against a primary, encryption, Linux native execution, and Ruby 3.3/3.4 execution have not been tested here. The connection descriptor and sync API support replicas; that does not establish end-to-end replication correctness.
+Live embedded replication, sync scheduling/read-your-writes behavior against a primary, encryption, Linux native execution, and Ruby 3.3/3.4 execution have not been tested here. The connection descriptor and sync API support replicas; that does not establish end-to-end replication correctness. Hosted remote checks do not cover token expiry/rotation, custom TLS settings, or production load behavior.
 
 ## Known limits
 

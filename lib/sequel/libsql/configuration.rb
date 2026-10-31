@@ -11,6 +11,9 @@ module Sequel
         @options = options
         path, url = location
         validate_url(url)
+        # Turso Cloud now supplies turso:// URLs. The pinned native driver
+        # predates that alias but supports the equivalent HTTPS endpoint.
+        url = url.sub(/\Aturso:/i, 'https:') if url
         @native_options = {:path => path, :url => url}
         add_credentials
         add_replication_options
@@ -37,7 +40,7 @@ module Sequel
         database = @options[:database]
         database = nil if database.to_s.empty?
         url = @options[:url]
-        if database && /\A(?:libsql|https?):\/\//i.match?(database.to_s)
+        if database && /\A(?:turso|libsql|https?):\/\//i.match?(database.to_s)
           raise Sequel::Error, 'specify the remote URL with database or url, not both' if url && url != database
           url = database
           database = nil
@@ -54,8 +57,8 @@ module Sequel
       def validate_url(url)
         if url
           uri = URI.parse(url.to_s)
-          unless %w[libsql https http].include?(uri.scheme) && uri.host && !uri.userinfo && !uri.fragment && !uri.query
-            raise Sequel::Error, 'libSQL URL must use libsql, https, or http with a host and no credentials, query, or fragment'
+          unless %w[turso libsql https http].include?(uri.scheme) && uri.host && !uri.userinfo && !uri.fragment && !uri.query
+            raise Sequel::Error, 'libSQL URL must use turso, libsql, https, or http with a host and no credentials, query, or fragment'
           end
         elsif @options[:auth_token]
           raise Sequel::Error, 'auth_token requires a remote URL'

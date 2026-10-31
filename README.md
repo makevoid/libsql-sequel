@@ -39,6 +39,12 @@ The driver bundles Apple Silicon macOS and glibc Linux x86_64/aarch64 libraries.
 
 ## Connection modes
 
+Turso Cloud's `turso://` URLs are also accepted, both as `database:`/`url:`
+options and directly through `Sequel.connect('turso://...', auth_token: ...)`.
+They are normalized to `https://` for the pinned native driver before opening
+a connection. The same credential/query/fragment validation applies. A
+`turso://` database URL is never treated as a local file path.
+
 ```ruby
 # Memory: a single pooled connection.
 db = Sequel.connect(adapter: :libsql)
@@ -127,6 +133,6 @@ bundle exec rake remote_local  # real native HTTP client, local Hrana server
 
 `tmp/` and `private_docs/` are Git-ignored and excluded from gem packaging. `private_docs/CONTINUATION.md` is the local continuation checkpoint to read after agent compaction.
 
-For an explicit test against a **disposable** hosted database, set `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN` in your environment, then run `bundle exec rake remote`. It creates randomly named test tables and drops those tables afterward. Hosted authentication, TLS, and embedded replication have not been validated in this workspace.
+For an explicit test against a **disposable** hosted database, set `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN` in your environment, then run `bundle exec rake remote`. It creates randomly named test tables and drops those tables afterward. Hosted authentication and HTTPS remote operations have been validated with a `turso://` URL; embedded replication remains unverified. See [compatibility and verification](docs/compatibility.md) for the tested scope.
 
 See [architecture](docs/architecture.md), [compatibility](docs/compatibility.md), and [the local example](examples/local.rb).
