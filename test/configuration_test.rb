@@ -71,6 +71,27 @@ class ConfigurationTest < AdapterTest
     db.disconnect if db
   end
 
+  def test_turso_urls_use_https_without_becoming_local_files
+    remote = configuration(:database => 'turso://example.turso.io', :auth_token => 'test-only')
+    assert_equal 'https://example.turso.io', remote.native_options[:url]
+    assert_nil remote.native_options[:path]
+    assert remote.remote?
+    replica = configuration(:url => 'turso://example.turso.io', :path => 'replica.db')
+    assert replica.replica?
+    assert_equal 'https://example.turso.io', replica.native_options[:url]
+    assert_raises(Sequel::Error){configuration(:database => 'turso://user:secret@example.com')}
+    assert_raises(Sequel::Error){configuration(:database => 'turso://example.com?auth_token=secret')}
+    assert_raises(Sequel::Error){configuration(:database => 'turso://example.com#secret')}
+  end
+
+  def test_turso_uri_selects_the_libsql_adapter
+    db = Sequel.connect('turso://example.turso.io', :test => false, :auth_token => 'test-only')
+    assert_instance_of Sequel::LibSQL::Database, db
+    assert_equal 'https://example.turso.io', configuration(db.opts).native_options[:url]
+  ensure
+    db.disconnect if db
+  end
+
   def test_remote_local_only_options_are_rejected
     [:timeout, :case_sensitive_like, :synchronous, :temp_store, :auto_vacuum].each do |option|
       assert_raises(Sequel::Error){configuration(:url => 'libsql://example.com', option => 1)}
