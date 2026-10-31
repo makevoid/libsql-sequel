@@ -2,10 +2,21 @@
 
 ```sh
 bundle install
-bundle exec rake test
+bundle exec rake check
 ```
 
 Tests use real native libSQL databases and clean up temporary files. No network service or credentials are required for the default suite. `sqlite3` is a development dependency for upstream compatibility tests; it is not loaded by the adapter.
+
+## Code checks
+
+`rake` defaults to `check`: `lint` followed by the tests. As in Sequel, tests run with `-w` and, on Ruby 3.4+, `-W:strict_unused_block`. There is no RuboCop/Standard configuration or complexity analyzer in Sequel's repository.
+
+- `bundle exec rake check_syntax` checks Ruby syntax and parser warnings in project library, test, task, and example files, plus Gemfile/Rakefile/gemspec. It fails on invalid syntax or warnings. Ignored clones, private notes, and installed gems are outside its file list.
+- `bundle exec rake check_visibility` uses Jeremy Evans' `visibility_checker`, also used by Sequel's optional visibility checks. It checks the database, dataset, and prepared dataset; changes originating in the adapter fail the task. Preexisting visibility changes inside Sequel itself are excluded.
+- `bundle exec rake lint` runs both checks.
+- `.github/workflows/ci.yml` runs `rake check` on Linux with Ruby 3.3, 3.4, and 4.0. The workflow configuration has been validated locally; those hosted jobs have not yet run for these changes.
+
+Code size was reviewed using Ruby's Prism AST to locate complete methods. No artificial complexity score is enforced. The largest configuration/type-inference methods were split by responsibility; see [testing-review.md](testing-review.md) for the measured sizes and coverage findings.
 
 ## Reference sources
 

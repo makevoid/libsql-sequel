@@ -104,7 +104,7 @@ DB.fetch('SELECT active, created_at FROM items').with_libsql_types(
 ).all
 
 # Supported hints: :boolean, :date, :datetime, :timestamp, :time, :decimal,
-# :blob, or a callable. NULL always remains nil.
+# :integer, :float, :blob, or a callable. NULL always remains nil.
 DB.fetch('SELECT upper(name) AS label FROM items').with_libsql_types(
   label: ->(value) { value.freeze }
 ).all
@@ -116,12 +116,16 @@ Use `Sequel::Model` normally for single-table model datasets. Joined/eager-graph
 
 ```sh
 bundle install
+bundle exec rake check         # syntax, visibility, and warning-enabled tests
+bundle exec rake lint          # syntax and method visibility only
 bundle exec rake test          # real native local/file databases
 bundle exec rake upstream      # upstream SQLite + integration specs
 bundle exec rake remote_local  # real native HTTP client, local Hrana server
 ```
 
-The latter two commands need the ignored reference checkouts; setup instructions are in [development.md](docs/development.md). `tmp/` and `private_docs/` are Git-ignored and excluded from gem packaging. `private_docs/CONTINUATION.md` is the local continuation checkpoint to read after agent compaction.
+`upstream` and `remote_local` need the ignored reference checkouts; setup instructions are in [development.md](docs/development.md). `rake` defaults to `check`. Checks follow Sequel's own syntax/warnings/visibility approach; Sequel does not configure RuboCop or a complexity analyzer. See [the spec and code-quality review](docs/testing-review.md).
+
+`tmp/` and `private_docs/` are Git-ignored and excluded from gem packaging. `private_docs/CONTINUATION.md` is the local continuation checkpoint to read after agent compaction.
 
 For an explicit test against a **disposable** hosted database, set `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN` in your environment, then run `bundle exec rake remote`. It creates randomly named test tables and drops those tables afterward. Hosted authentication, TLS, and embedded replication have not been validated in this workspace.
 

@@ -6,8 +6,8 @@ As of 2026-10-31, Apple Silicon macOS, Ruby 4.0.5, `turso_libsql` 0.2.0, bundled
 
 - Native local/file tests cover CRUD, signed integer boundaries, UTF-8, arbitrary/empty blobs, invalid input, native lifetime cleanup, prepared queries, constraints, transactions/savepoints/commit failure, models, associations, migrations, schema alteration, pool concurrency, reconnect, and type hints.
 - The same project suite passes with Sequel 5.80.0 and 5.109.0.
-- Sequel upstream at `75b425dd1c1f34908426dd70371d14e4afb9c933`: SQLite adapter plus all integration specs pass, with six upstream skips. The test sources are unmodified.
-- Real native HTTP execution against the official Hrana v3 Python fixture covers prepared Unicode/blob values, affected counts, inserted IDs, constraints, transactions/savepoints, reconnect, schema metadata, and RETURNING.
+- Sequel upstream at `75b425dd1c1f34908426dd70371d14e4afb9c933`: SQLite adapter plus integration run passes (901 tests, six upstream skips). The test sources are unmodified. Some additional groups are never defined for an external adapter: seven SQLite type-conversion cases gated on `adapter_scheme == :sqlite` now have local equivalents. See [the coverage review](testing-review.md).
+- Real native HTTP execution against the official Hrana v3 Python fixture covers prepared Unicode/blob values, affected counts, inserted IDs, constraints, transactions/savepoints, reconnect, schema metadata, empty results, NULL values, models using prepared statements, and INSERT/UPDATE/DELETE RETURNING.
 - The fixture wrapper only normalizes padded/unpadded base64 between Python and Rust. SQL and stream handling stay upstream. This is a protocol integration test, not a hosted Turso test.
 
 Exact counts and commands are recorded in the local ignored continuation notes and test logs.
