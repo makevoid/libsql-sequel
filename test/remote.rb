@@ -60,4 +60,27 @@ class RemoteTest < Minitest::Test
     assert_equal :blob, @db.schema(@table).to_h[:data][:type]
     assert @db.indexes(@table).values.any?{|index| index[:unique]}
   end
+
+  def test_native_remote_model_lifecycle
+    model = Class.new(Sequel::Model(@items))
+    model.plugin :prepared_statements
+    item = model.create(:name => 'remote model', :quantity => 1)
+    assert_equal 1, item.id
+    assert_equal 'remote model', model[item.id].name
+    item.update(:quantity => 5)
+    assert_equal 5, item.refresh.quantity
+    item.destroy
+    assert_nil model[item.id]
+  end
+
+  def test_native_remote_empty_results_nulls_and_returning_writes
+    assert_equal [:id, :name, :quantity, :data], @items.columns
+    assert_empty @items.all
+    @items.insert(:name => 'nullable')
+    assert_nil @items.first[:quantity]
+    assert_nil @items.first[:data]
+    assert_equal [{:quantity => 4}], @items.returning(:quantity).update(:quantity => 4)
+    assert_equal [{:id => 1}], @items.returning(:id).delete
+    assert_equal 0, @items.delete
+  end
 end

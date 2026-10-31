@@ -47,6 +47,18 @@ module Sequel
         connection.close
       end
 
+      # Match SQLite's unix-second and Julian-day timestamp representations.
+      def to_application_timestamp(value)
+        case value
+        when Integer
+          super(Time.at(value).to_s)
+        when Float
+          super(DateTime.jd(value).to_s)
+        else
+          super
+        end
+      end
+
       def execute(sql, opts=OPTS, &block)
         _execute(:select, sql, opts, &block)
       end

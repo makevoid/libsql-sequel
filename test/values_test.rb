@@ -135,4 +135,13 @@ class ValuesTest < AdapterTest
     assert_equal 'raw', items.select(:active, Sequel.as('raw', :active)).first[:active]
     assert_equal 'raw', items.select_all(:items).select_append(Sequel.as('raw', :active)).first[:active]
   end
+
+  def test_repeated_get_keeps_column_types_without_typing_expressions
+    items = create_items
+    items.insert(:name => 'one', :active => true)
+    5.times do
+      assert_equal true, items.get(:active)
+      assert_equal 'raw', items.get(Sequel.as('raw', :active))
+    end
+  end
 end
