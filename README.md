@@ -131,8 +131,6 @@ bundle exec rake remote_local  # real native HTTP client, local Hrana server
 
 `upstream` and `remote_local` need the ignored reference checkouts; setup instructions are in [development.md](docs/development.md). `rake` defaults to `check`. Checks follow Sequel's own syntax/warnings/visibility approach; Sequel does not configure RuboCop or a complexity analyzer. See [the spec and code-quality review](docs/testing-review.md).
 
-`tmp/` and `private_docs/` are Git-ignored and excluded from gem packaging. `private_docs/CONTINUATION.md` is the local continuation checkpoint to read after agent compaction.
-
 For an explicit test against a **disposable** hosted database, set `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN` in your environment, then run `bundle exec rake remote`. It creates randomly named test tables and drops those tables afterward. Hosted authentication and HTTPS remote operations have been validated with a `turso://` URL; embedded replication remains unverified. See [compatibility and verification](docs/compatibility.md) for the tested scope.
 
 See [architecture](docs/architecture.md), [compatibility](docs/compatibility.md), and [the local example](examples/local.rb).

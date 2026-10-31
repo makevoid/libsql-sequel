@@ -59,7 +59,3 @@ gem build libsql-sequel.gemspec --output pkg/libsql-sequel-0.1.0.gem
 ```
 
 The explicit gem file list includes Ruby library files, public docs, examples, README, and LICENSE. It excludes private notes, cloned repositories, credentials, tests, and temporary databases. Nothing is automatically published.
-
-## Agent continuation
-
-Private research is in `private_docs/`, ignored by Git and excluded from the package. Read `private_docs/CONTINUATION.md`, then `ARCHITECTURE.md` and `RESEARCH.md`, after compaction before resuming work. Update the checkpoint with actual commands/results and open limitations as implementation changes.
