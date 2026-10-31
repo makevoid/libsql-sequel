@@ -101,7 +101,7 @@ Bound values use native parameters. Named Sequel prepared queries prepare a nati
 
 ## Values and result types
 
-Integers preserve signed 64-bit values; strings are UTF-8; blobs preserve all bytes. Use `Sequel.blob(bytes)` for binary data. NUL-containing text is rejected on input because the native C API truncates it. The same upstream limitation affects existing TEXT values containing NUL when reading them; store those values as blobs. Out-of-range bound integers, invalid text, and non-finite bound floats are rejected.
+Integers preserve signed 64-bit values; strings are converted to UTF-8; blobs preserve all bytes. Use `Sequel.blob(bytes)` for binary data. Invalid text encodings and strings that cannot be converted to UTF-8 raise `Sequel::Error`. NUL-containing text is rejected on input because the native C API truncates it. The same upstream limitation affects existing TEXT values containing NUL when reading them; store those values as blobs. Out-of-range bound integers, invalid text, and non-finite bound floats are rejected.
 
 The native API does not expose declared result-column types. Simple single-table datasets infer date, datetime, time, decimal, and boolean conversions from Sequel's schema cache, including direct column aliases and prepared queries. Raw SQL, joins, CTEs, compounds, and arbitrary expressions retain native SQLite values. Use explicit hints when necessary:
 

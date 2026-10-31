@@ -51,6 +51,8 @@ module Sequel
         raise Sequel::Error, 'libSQL text cannot contain NUL bytes; use Sequel.blob for binary data' if value.include?("\0")
         raise Sequel::Error, 'libSQL text must be valid UTF-8' unless value.valid_encoding?
         value
+      rescue Encoding::UndefinedConversionError, Encoding::InvalidByteSequenceError
+        raise Sequel::Error, 'libSQL text must be convertible to UTF-8; use Sequel.blob for binary data'
       end
 
       # C text slices include a terminal NUL; blob slices do not.

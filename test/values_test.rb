@@ -35,6 +35,23 @@ class ValuesTest < AdapterTest
     assert_equal 'still works', bound('still works')
   end
 
+  def test_invalid_text_encodings_raise_sequel_errors
+    ["\xFF".b, "\xFF".dup.force_encoding(Encoding::UTF_8),
+     "\x00".dup.force_encoding(Encoding::UTF_16LE)].each do |value|
+      assert_raises(Sequel::Error){bound(value)}
+      assert_raises(Sequel::Error){@db.get(value)}
+    end
+    assert_equal 'still works', bound('still works')
+    assert_equal "\xFF".b, bound(Sequel.blob("\xFF".b))
+  end
+
+  def test_text_is_transcoded_to_utf8
+    value = "caf\xE9".dup.force_encoding(Encoding::ISO_8859_1)
+    assert_equal 'café', bound(value)
+    assert_equal 'café', @db.get(value)
+    assert_equal Encoding::UTF_8, bound(value).encoding
+  end
+
   def test_dates_times_decimals_and_booleans
     @db.create_table(:typed) do
       Date :day
