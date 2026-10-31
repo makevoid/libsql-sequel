@@ -26,11 +26,11 @@ DB.disconnect
 
 ## Installation
 
-The adapter is not published to RubyGems. Use this checkout:
+Until a RubyGems release is available, install directly from GitHub:
 
 ```ruby
 # Gemfile
-gem 'libsql-sequel', path: '/path/to/libsql-sequel'
+gem 'libsql-sequel', git: 'https://github.com/makevoid/libsql-sequel.git', branch: 'main'
 ```
 
 Then `bundle install`. Ruby 3.3+ and Sequel 5.80–5.x are required. The native dependency is **pinned to `turso_libsql` 0.2.0**: 0.2.1 contains native debug output of connection credentials and SQL. Do not widen that dependency without reviewing the replacement library. The adapter uses the bundled native library with scoped corrections for the driver's Ruby wrapper; it does not patch global `Libsql` classes or require `sqlite3` at runtime.
