@@ -1,2 +1,7 @@
-
-
+/tmp/
+/private_docs/
+/.bundle/
+/vendor/bundle/
+/pkg/
+*.gem
+.DS_Store
