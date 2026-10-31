@@ -26,14 +26,20 @@ DB.disconnect
 
 ## Installation
 
-Until a RubyGems release is available, install directly from GitHub:
+Install from [RubyGems](https://rubygems.org/gems/libsql-sequel):
 
 ```ruby
 # Gemfile
-gem 'libsql-sequel', git: 'https://github.com/makevoid/libsql-sequel.git', branch: 'main'
+gem 'libsql-sequel', '~> 0.3.0'
 ```
 
-Then `bundle install`. Ruby 3.3+ and Sequel 5.80–5.x are required. The native dependency is **pinned to `turso_libsql` 0.2.0**: 0.2.1 contains native debug output of connection credentials and SQL. Do not widen that dependency without reviewing the replacement library. The adapter uses the bundled native library with scoped corrections for the driver's Ruby wrapper; it does not patch global `Libsql` classes or require `sqlite3` at runtime.
+Then run `bundle install`. To install without Bundler:
+
+```sh
+gem install libsql-sequel -v 0.3.0
+```
+
+Ruby 3.3+ and Sequel 5.80–5.x are required. The native dependency is **pinned to `turso_libsql` 0.2.0**: 0.2.1 contains native debug output of connection credentials and SQL. Do not widen that dependency without reviewing the replacement library. The adapter uses the bundled native library with scoped corrections for the driver's Ruby wrapper; it does not patch global `Libsql` classes or require `sqlite3` at runtime.
 
 The driver bundles Apple Silicon macOS and glibc Linux x86_64/aarch64 libraries. Intel macOS, Windows, musl Linux, and JRuby are not supported by this pinned distribution. Current verification was on Apple Silicon macOS / Ruby 4.0.5. See [compatibility and verification](docs/compatibility.md).
 

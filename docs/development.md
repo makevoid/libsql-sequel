@@ -55,7 +55,7 @@ For a disposable hosted database, export `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH
 
 ```sh
 mkdir -p pkg
-gem build libsql-sequel.gemspec --output pkg/libsql-sequel-0.1.0.gem
+gem build libsql-sequel.gemspec --output pkg/libsql-sequel-0.3.0.gem
 ```
 
 The explicit gem file list includes Ruby library files, public docs, examples, README, and LICENSE. It excludes private notes, cloned repositories, credentials, tests, and temporary databases. Nothing is automatically published.
