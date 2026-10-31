@@ -1,0 +1,4329 @@
+{
+  "baseline-memory": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:35:36Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "memory",
+      "synchronous": 1,
+      "adapter_source_sha256": "1eda62671b39a6aee3d0bbf3046dac34503b83d8a4bd5c5ddb542481ab481c70",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "memory",
+      "iterations": 100,
+      "warmup": 10,
+      "samples": 5,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "output": "tmp/performance/baseline-memory.json"
+    },
+    "results": [
+      {
+        "name": "ruby.chain_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 17.87,
+        "median_allocations": 75.01,
+        "min_us": 16.45,
+        "max_us": 19.21,
+        "sample_us": [
+          19.21,
+          18.67,
+          16.45,
+          17.09,
+          17.87
+        ]
+      },
+      {
+        "name": "ruby.reused_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 0.33,
+        "median_allocations": 0.01,
+        "min_us": 0.31,
+        "max_us": 0.39,
+        "sample_us": [
+          0.33,
+          0.31,
+          0.39,
+          0.32,
+          0.34
+        ]
+      },
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 48.59,
+        "median_allocations": 155.01,
+        "min_us": 46.36,
+        "max_us": 54.58,
+        "sample_us": [
+          48.59,
+          54.58,
+          46.36,
+          48.57,
+          48.72
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 27.14,
+        "median_allocations": 80.01,
+        "min_us": 25.09,
+        "max_us": 29.21,
+        "sample_us": [
+          25.09,
+          26.47,
+          27.54,
+          29.21,
+          27.14
+        ]
+      },
+      {
+        "name": "read.raw_sql",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 23.88,
+        "median_allocations": 79.01,
+        "min_us": 22.98,
+        "max_us": 27.04,
+        "sample_us": [
+          23.23,
+          27.04,
+          23.88,
+          22.98,
+          24.65
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 24.89,
+        "median_allocations": 69.01,
+        "min_us": 21.4,
+        "max_us": 29.48,
+        "sample_us": [
+          29.48,
+          25.54,
+          21.43,
+          24.89,
+          21.4
+        ]
+      },
+      {
+        "name": "read.primary_key",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 69.28,
+        "median_allocations": 268.02,
+        "min_us": 66.51,
+        "max_us": 80.79,
+        "sample_us": [
+          71.52,
+          68.52,
+          66.51,
+          69.28,
+          80.79
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 35.42,
+        "median_allocations": 116.01,
+        "min_us": 33.56,
+        "max_us": 37.63,
+        "sample_us": [
+          33.56,
+          35.42,
+          34.85,
+          36.88,
+          37.63
+        ]
+      },
+      {
+        "name": "read.get",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 33.59,
+        "median_allocations": 92.01,
+        "min_us": 32.81,
+        "max_us": 34.52,
+        "sample_us": [
+          33.85,
+          32.81,
+          34.52,
+          33.55,
+          33.59
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 65.95,
+        "median_allocations": 266.03,
+        "min_us": 64.55,
+        "max_us": 73.89,
+        "sample_us": [
+          65.95,
+          72.69,
+          64.55,
+          65.08,
+          73.89
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 32.39,
+        "median_allocations": 115.01,
+        "min_us": 31.8,
+        "max_us": 35.38,
+        "sample_us": [
+          32.39,
+          32.3,
+          31.8,
+          33.08,
+          35.38
+        ]
+      },
+      {
+        "name": "read.db_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.16,
+        "median_allocations": 115.01,
+        "min_us": 33.17,
+        "max_us": 34.56,
+        "sample_us": [
+          34.16,
+          34.35,
+          34.56,
+          33.17,
+          33.39
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 32.9,
+        "median_allocations": 141.02,
+        "min_us": 31.59,
+        "max_us": 33.76,
+        "sample_us": [
+          33.28,
+          31.59,
+          33.76,
+          32.9,
+          31.7
+        ]
+      },
+      {
+        "name": "read.narrow_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 6714.44,
+        "median_allocations": 33066.01,
+        "min_us": 6640.69,
+        "max_us": 6896.71,
+        "sample_us": [
+          6714.44,
+          6896.71,
+          6668.51,
+          6640.69,
+          6728.58
+        ]
+      },
+      {
+        "name": "read.typed_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 35270.16,
+        "median_allocations": 155091.02,
+        "min_us": 35155.69,
+        "max_us": 37050.26,
+        "sample_us": [
+          35624.44,
+          35155.69,
+          35270.16,
+          37050.26,
+          35162.78
+        ]
+      },
+      {
+        "name": "read.each",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3624.7,
+        "median_allocations": 18050.01,
+        "min_us": 3497.75,
+        "max_us": 3724.84,
+        "sample_us": [
+          3724.84,
+          3624.7,
+          3612.99,
+          3497.75,
+          3633.9
+        ]
+      },
+      {
+        "name": "read.early_break",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 26.07,
+        "median_allocations": 73.01,
+        "min_us": 25.76,
+        "max_us": 29.81,
+        "sample_us": [
+          29.81,
+          26.07,
+          25.88,
+          25.76,
+          29.12
+        ]
+      },
+      {
+        "name": "read.select_map",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3646.08,
+        "median_allocations": 18062.01,
+        "min_us": 3591.35,
+        "max_us": 3739.83,
+        "sample_us": [
+          3739.83,
+          3646.08,
+          3591.35,
+          3638.78,
+          3646.96
+        ]
+      },
+      {
+        "name": "read.aggregate",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 17.05,
+        "median_allocations": 46.01,
+        "min_us": 16.27,
+        "max_us": 19.38,
+        "sample_us": [
+          16.81,
+          17.32,
+          19.38,
+          17.05,
+          16.27
+        ]
+      },
+      {
+        "name": "read.join",
+        "kind": "read",
+        "units_per_iteration": 10,
+        "median_us": 66.64,
+        "median_allocations": 263.01,
+        "min_us": 65.13,
+        "max_us": 73.66,
+        "sample_us": [
+          65.13,
+          73.66,
+          66.83,
+          65.56,
+          66.64
+        ]
+      },
+      {
+        "name": "model.primary_key",
+        "kind": "model",
+        "units_per_iteration": 1,
+        "median_us": 75.09,
+        "median_allocations": 264.02,
+        "min_us": 69.8,
+        "max_us": 81.7,
+        "sample_us": [
+          69.8,
+          75.09,
+          81.7,
+          71.85,
+          77.79
+        ]
+      },
+      {
+        "name": "model.all",
+        "kind": "model",
+        "units_per_iteration": 1000,
+        "median_us": 36013.71,
+        "median_allocations": 156092.04,
+        "min_us": 35822.04,
+        "max_us": 37161.4,
+        "sample_us": [
+          35822.04,
+          36239.24,
+          35971.91,
+          37161.4,
+          36013.71
+        ]
+      },
+      {
+        "name": "model.n_plus_one",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 836.5,
+        "median_allocations": 2773.04,
+        "min_us": 806.04,
+        "max_us": 888.73,
+        "sample_us": [
+          806.04,
+          836.5,
+          807.3,
+          888.73,
+          867.55
+        ]
+      },
+      {
+        "name": "model.eager",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 497.12,
+        "median_allocations": 2122.02,
+        "min_us": 474.21,
+        "max_us": 517.29,
+        "sample_us": [
+          497.12,
+          495.75,
+          516.07,
+          474.21,
+          517.29
+        ]
+      },
+      {
+        "name": "schema.cached",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 1.45,
+        "median_allocations": 7.01,
+        "min_us": 1.39,
+        "max_us": 1.62,
+        "sample_us": [
+          1.56,
+          1.62,
+          1.39,
+          1.39,
+          1.45
+        ]
+      },
+      {
+        "name": "schema.reload",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 168.28,
+        "median_allocations": 840.01,
+        "min_us": 160.53,
+        "max_us": 173.63,
+        "sample_us": [
+          160.53,
+          173.63,
+          164.33,
+          169.09,
+          168.28
+        ]
+      },
+      {
+        "name": "native.pooled_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 10.9,
+        "median_allocations": 37.01,
+        "min_us": 10.44,
+        "max_us": 12.08,
+        "sample_us": [
+          11.6,
+          12.08,
+          10.44,
+          10.64,
+          10.9
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 13.02,
+        "median_allocations": 49.01,
+        "min_us": 12.32,
+        "max_us": 14.17,
+        "sample_us": [
+          14.17,
+          12.32,
+          13.02,
+          12.59,
+          13.47
+        ]
+      },
+      {
+        "name": "write.insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 16.75,
+        "median_allocations": 27.01,
+        "min_us": 15.5,
+        "max_us": 18.93,
+        "sample_us": [
+          16.75,
+          18.93,
+          16.12,
+          15.5,
+          18.89
+        ]
+      },
+      {
+        "name": "write.bound_insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 16.75,
+        "median_allocations": 43.02,
+        "min_us": 16.31,
+        "max_us": 17.34,
+        "sample_us": [
+          16.31,
+          17.34,
+          16.55,
+          17.15,
+          16.75
+        ]
+      },
+      {
+        "name": "write.update",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 16.97,
+        "median_allocations": 42.01,
+        "min_us": 16.63,
+        "max_us": 20.05,
+        "sample_us": [
+          19.73,
+          16.93,
+          16.63,
+          16.97,
+          20.05
+        ]
+      },
+      {
+        "name": "write.delete",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 17.21,
+        "median_allocations": 32.01,
+        "min_us": 16.28,
+        "max_us": 19.21,
+        "sample_us": [
+          16.28,
+          19.21,
+          18.53,
+          17.21,
+          16.77
+        ]
+      },
+      {
+        "name": "write.returning",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 36.13,
+        "median_allocations": 84.01,
+        "min_us": 34.01,
+        "max_us": 41.21,
+        "sample_us": [
+          36.13,
+          38.76,
+          41.21,
+          34.01,
+          34.77
+        ]
+      },
+      {
+        "name": "write.upsert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 20.68,
+        "median_allocations": 40.01,
+        "min_us": 20.48,
+        "max_us": 22.95,
+        "sample_us": [
+          20.67,
+          22.95,
+          20.68,
+          21.34,
+          20.48
+        ]
+      },
+      {
+        "name": "transaction.commit",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 25.05,
+        "median_allocations": 40.01,
+        "min_us": 24.79,
+        "max_us": 28.99,
+        "sample_us": [
+          28.99,
+          24.79,
+          25.05,
+          24.98,
+          25.77
+        ]
+      },
+      {
+        "name": "transaction.rollback",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 27.77,
+        "median_allocations": 43.01,
+        "min_us": 26.56,
+        "max_us": 30.41,
+        "sample_us": [
+          26.56,
+          27.0,
+          27.77,
+          30.41,
+          28.26
+        ]
+      },
+      {
+        "name": "transaction.savepoint",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 50.73,
+        "median_allocations": 84.01,
+        "min_us": 49.07,
+        "max_us": 58.67,
+        "sample_us": [
+          50.37,
+          58.67,
+          51.64,
+          49.07,
+          50.73
+        ]
+      },
+      {
+        "name": "bulk.autocommit_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 315.07,
+        "median_allocations": 540.01,
+        "min_us": 305.2,
+        "max_us": 342.17,
+        "sample_us": [
+          342.17,
+          305.2,
+          315.57,
+          315.07,
+          313.6
+        ]
+      },
+      {
+        "name": "bulk.transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 284.59,
+        "median_allocations": 553.01,
+        "min_us": 276.06,
+        "max_us": 291.13,
+        "sample_us": [
+          291.13,
+          290.74,
+          280.07,
+          284.59,
+          276.06
+        ]
+      },
+      {
+        "name": "bulk.prepared_transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 293.45,
+        "median_allocations": 873.01,
+        "min_us": 288.47,
+        "max_us": 301.08,
+        "sample_us": [
+          292.45,
+          288.47,
+          293.45,
+          294.18,
+          301.08
+        ]
+      },
+      {
+        "name": "bulk.import",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 40.51,
+        "median_allocations": 52.01,
+        "min_us": 39.17,
+        "max_us": 44.26,
+        "sample_us": [
+          41.89,
+          40.51,
+          39.49,
+          39.17,
+          44.26
+        ]
+      },
+      {
+        "name": "bulk.sql_batch_transaction",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 47.33,
+        "median_allocations": 17.01,
+        "min_us": 45.26,
+        "max_us": 50.74,
+        "sample_us": [
+          45.45,
+          47.47,
+          47.33,
+          50.74,
+          45.26
+        ]
+      },
+      {
+        "name": "error.unique_constraint",
+        "kind": "error",
+        "units_per_iteration": 1,
+        "median_us": 30.05,
+        "median_allocations": 96.01,
+        "min_us": 28.32,
+        "max_us": 32.96,
+        "sample_us": [
+          30.05,
+          30.01,
+          30.22,
+          28.32,
+          32.96
+        ]
+      },
+      {
+        "name": "schema.create_drop",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 86.94,
+        "median_allocations": 202.01,
+        "min_us": 84.95,
+        "max_us": 95.48,
+        "sample_us": [
+          95.48,
+          90.04,
+          84.95,
+          86.94,
+          85.59
+        ]
+      },
+      {
+        "name": "connection.checkout",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 0.92,
+        "median_allocations": 0.01,
+        "min_us": 0.85,
+        "max_us": 0.97,
+        "sample_us": [
+          0.86,
+          0.92,
+          0.94,
+          0.97,
+          0.85
+        ]
+      },
+      {
+        "name": "connection.connect_query_disconnect",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 195.4,
+        "median_allocations": 264.3,
+        "min_us": 186.7,
+        "max_us": 203.3,
+        "sample_us": [
+          186.7,
+          190.2,
+          195.4,
+          201.3,
+          203.3
+        ]
+      }
+    ]
+  },
+  "optimized-memory": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:38:25Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "memory",
+      "synchronous": 1,
+      "adapter_source_sha256": "d0353b81ff3b8941c8d655633fe8e0c5cd04218ee07fbc4542a9a6d90804a430",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "memory",
+      "iterations": 100,
+      "warmup": 10,
+      "samples": 5,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "output": "tmp/performance/optimized-memory.json"
+    },
+    "results": [
+      {
+        "name": "ruby.chain_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 17.03,
+        "median_allocations": 75.01,
+        "min_us": 16.05,
+        "max_us": 18.24,
+        "sample_us": [
+          16.05,
+          17.03,
+          18.24,
+          16.62,
+          17.61
+        ]
+      },
+      {
+        "name": "ruby.reused_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 0.31,
+        "median_allocations": 0.01,
+        "min_us": 0.29,
+        "max_us": 0.33,
+        "sample_us": [
+          0.33,
+          0.31,
+          0.32,
+          0.3,
+          0.29
+        ]
+      },
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 48.61,
+        "median_allocations": 153.01,
+        "min_us": 46.96,
+        "max_us": 49.55,
+        "sample_us": [
+          48.55,
+          49.55,
+          49.2,
+          48.61,
+          46.96
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 26.53,
+        "median_allocations": 78.01,
+        "min_us": 25.28,
+        "max_us": 27.89,
+        "sample_us": [
+          27.89,
+          27.56,
+          26.53,
+          25.28,
+          26.26
+        ]
+      },
+      {
+        "name": "read.raw_sql",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 22.93,
+        "median_allocations": 77.01,
+        "min_us": 22.31,
+        "max_us": 24.83,
+        "sample_us": [
+          22.31,
+          22.61,
+          23.19,
+          24.83,
+          22.93
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 21.76,
+        "median_allocations": 67.01,
+        "min_us": 21.31,
+        "max_us": 23.31,
+        "sample_us": [
+          21.31,
+          22.76,
+          23.31,
+          21.69,
+          21.76
+        ]
+      },
+      {
+        "name": "read.primary_key",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 68.79,
+        "median_allocations": 262.02,
+        "min_us": 66.54,
+        "max_us": 75.46,
+        "sample_us": [
+          75.46,
+          66.54,
+          68.58,
+          71.93,
+          68.79
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 37.57,
+        "median_allocations": 117.01,
+        "min_us": 35.41,
+        "max_us": 38.62,
+        "sample_us": [
+          38.16,
+          35.41,
+          37.57,
+          36.74,
+          38.62
+        ]
+      },
+      {
+        "name": "read.get",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 33.05,
+        "median_allocations": 90.01,
+        "min_us": 32.41,
+        "max_us": 39.16,
+        "sample_us": [
+          39.16,
+          33.05,
+          32.97,
+          37.56,
+          32.41
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 65.98,
+        "median_allocations": 258.03,
+        "min_us": 64.37,
+        "max_us": 72.56,
+        "sample_us": [
+          65.98,
+          72.56,
+          65.93,
+          64.37,
+          67.26
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 35.93,
+        "median_allocations": 107.01,
+        "min_us": 31.14,
+        "max_us": 38.1,
+        "sample_us": [
+          38.1,
+          35.93,
+          31.14,
+          32.24,
+          36.3
+        ]
+      },
+      {
+        "name": "read.db_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 31.91,
+        "median_allocations": 107.01,
+        "min_us": 31.53,
+        "max_us": 35.52,
+        "sample_us": [
+          31.53,
+          35.52,
+          32.52,
+          31.91,
+          31.65
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 31.35,
+        "median_allocations": 130.02,
+        "min_us": 31.06,
+        "max_us": 32.17,
+        "sample_us": [
+          31.28,
+          31.35,
+          32.17,
+          31.06,
+          31.97
+        ]
+      },
+      {
+        "name": "read.narrow_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 6111.84,
+        "median_allocations": 30067.01,
+        "min_us": 6001.22,
+        "max_us": 6151.19,
+        "sample_us": [
+          6129.38,
+          6086.0,
+          6001.22,
+          6151.19,
+          6111.84
+        ]
+      },
+      {
+        "name": "read.typed_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 33728.26,
+        "median_allocations": 148092.02,
+        "min_us": 33493.06,
+        "max_us": 33840.96,
+        "sample_us": [
+          33840.96,
+          33493.06,
+          33733.19,
+          33728.26,
+          33541.19
+        ]
+      },
+      {
+        "name": "read.each",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3339.41,
+        "median_allocations": 15051.01,
+        "min_us": 3304.5,
+        "max_us": 3492.35,
+        "sample_us": [
+          3339.41,
+          3320.55,
+          3422.18,
+          3304.5,
+          3492.35
+        ]
+      },
+      {
+        "name": "read.early_break",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 26.26,
+        "median_allocations": 71.01,
+        "min_us": 25.63,
+        "max_us": 27.96,
+        "sample_us": [
+          25.63,
+          27.96,
+          26.18,
+          26.75,
+          26.26
+        ]
+      },
+      {
+        "name": "read.select_map",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3530.84,
+        "median_allocations": 15063.01,
+        "min_us": 3405.44,
+        "max_us": 3603.27,
+        "sample_us": [
+          3405.44,
+          3603.27,
+          3475.94,
+          3530.84,
+          3531.67
+        ]
+      },
+      {
+        "name": "read.aggregate",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 17.67,
+        "median_allocations": 44.01,
+        "min_us": 16.29,
+        "max_us": 18.83,
+        "sample_us": [
+          16.29,
+          18.83,
+          18.58,
+          17.67,
+          17.14
+        ]
+      },
+      {
+        "name": "read.join",
+        "kind": "read",
+        "units_per_iteration": 10,
+        "median_us": 66.36,
+        "median_allocations": 234.01,
+        "min_us": 64.86,
+        "max_us": 69.48,
+        "sample_us": [
+          65.56,
+          64.86,
+          68.67,
+          69.48,
+          66.36
+        ]
+      },
+      {
+        "name": "model.primary_key",
+        "kind": "model",
+        "units_per_iteration": 1,
+        "median_us": 72.26,
+        "median_allocations": 258.02,
+        "min_us": 68.88,
+        "max_us": 81.11,
+        "sample_us": [
+          81.11,
+          69.52,
+          75.94,
+          68.88,
+          72.26
+        ]
+      },
+      {
+        "name": "model.all",
+        "kind": "model",
+        "units_per_iteration": 1000,
+        "median_us": 34059.79,
+        "median_allocations": 149093.04,
+        "min_us": 33805.45,
+        "max_us": 34257.2,
+        "sample_us": [
+          34257.2,
+          33880.65,
+          34068.29,
+          33805.45,
+          34059.79
+        ]
+      },
+      {
+        "name": "model.n_plus_one",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 831.96,
+        "median_allocations": 2664.04,
+        "min_us": 814.59,
+        "max_us": 896.27,
+        "sample_us": [
+          896.27,
+          860.11,
+          831.96,
+          819.21,
+          814.59
+        ]
+      },
+      {
+        "name": "model.eager",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 489.01,
+        "median_allocations": 2004.02,
+        "min_us": 461.35,
+        "max_us": 512.45,
+        "sample_us": [
+          491.06,
+          489.01,
+          486.41,
+          512.45,
+          461.35
+        ]
+      },
+      {
+        "name": "schema.cached",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 1.45,
+        "median_allocations": 7.01,
+        "min_us": 1.34,
+        "max_us": 1.49,
+        "sample_us": [
+          1.45,
+          1.49,
+          1.49,
+          1.44,
+          1.34
+        ]
+      },
+      {
+        "name": "schema.reload",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 153.96,
+        "median_allocations": 769.01,
+        "min_us": 147.46,
+        "max_us": 158.97,
+        "sample_us": [
+          158.97,
+          148.79,
+          156.82,
+          147.46,
+          153.96
+        ]
+      },
+      {
+        "name": "native.pooled_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 10.97,
+        "median_allocations": 34.01,
+        "min_us": 10.69,
+        "max_us": 11.45,
+        "sample_us": [
+          11.3,
+          10.8,
+          10.69,
+          10.97,
+          11.45
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 12.34,
+        "median_allocations": 40.01,
+        "min_us": 11.87,
+        "max_us": 13.05,
+        "sample_us": [
+          11.87,
+          12.59,
+          12.22,
+          12.34,
+          13.05
+        ]
+      },
+      {
+        "name": "write.insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 16.15,
+        "median_allocations": 27.01,
+        "min_us": 15.56,
+        "max_us": 17.27,
+        "sample_us": [
+          17.27,
+          16.12,
+          16.27,
+          15.56,
+          16.15
+        ]
+      },
+      {
+        "name": "write.bound_insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 17.06,
+        "median_allocations": 37.02,
+        "min_us": 15.63,
+        "max_us": 21.54,
+        "sample_us": [
+          15.63,
+          17.06,
+          21.54,
+          15.9,
+          17.44
+        ]
+      },
+      {
+        "name": "write.update",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 18.07,
+        "median_allocations": 42.01,
+        "min_us": 16.97,
+        "max_us": 19.52,
+        "sample_us": [
+          16.97,
+          17.77,
+          19.52,
+          18.44,
+          18.07
+        ]
+      },
+      {
+        "name": "write.delete",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 16.82,
+        "median_allocations": 32.01,
+        "min_us": 15.54,
+        "max_us": 18.2,
+        "sample_us": [
+          15.78,
+          18.2,
+          17.94,
+          16.82,
+          15.54
+        ]
+      },
+      {
+        "name": "write.returning",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 36.95,
+        "median_allocations": 82.01,
+        "min_us": 34.65,
+        "max_us": 41.28,
+        "sample_us": [
+          36.95,
+          41.28,
+          37.58,
+          34.83,
+          34.65
+        ]
+      },
+      {
+        "name": "write.upsert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 21.25,
+        "median_allocations": 39.01,
+        "min_us": 20.05,
+        "max_us": 21.75,
+        "sample_us": [
+          20.05,
+          21.25,
+          21.34,
+          20.69,
+          21.75
+        ]
+      },
+      {
+        "name": "transaction.commit",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 24.93,
+        "median_allocations": 38.01,
+        "min_us": 24.53,
+        "max_us": 26.69,
+        "sample_us": [
+          24.53,
+          26.69,
+          25.15,
+          24.93,
+          24.6
+        ]
+      },
+      {
+        "name": "transaction.rollback",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 27.91,
+        "median_allocations": 41.01,
+        "min_us": 26.9,
+        "max_us": 29.64,
+        "sample_us": [
+          27.91,
+          27.01,
+          28.74,
+          26.9,
+          29.64
+        ]
+      },
+      {
+        "name": "transaction.savepoint",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 55.03,
+        "median_allocations": 82.01,
+        "min_us": 51.3,
+        "max_us": 56.05,
+        "sample_us": [
+          56.05,
+          51.62,
+          55.7,
+          51.3,
+          55.03
+        ]
+      },
+      {
+        "name": "bulk.autocommit_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 305.82,
+        "median_allocations": 540.01,
+        "min_us": 296.14,
+        "max_us": 318.38,
+        "sample_us": [
+          296.14,
+          314.92,
+          318.38,
+          301.59,
+          305.82
+        ]
+      },
+      {
+        "name": "bulk.transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 279.01,
+        "median_allocations": 551.01,
+        "min_us": 252.47,
+        "max_us": 285.39,
+        "sample_us": [
+          270.85,
+          279.01,
+          285.39,
+          282.3,
+          252.47
+        ]
+      },
+      {
+        "name": "bulk.prepared_transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 273.7,
+        "median_allocations": 751.01,
+        "min_us": 269.43,
+        "max_us": 300.45,
+        "sample_us": [
+          300.45,
+          269.43,
+          272.37,
+          273.7,
+          282.76
+        ]
+      },
+      {
+        "name": "bulk.import",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 38.86,
+        "median_allocations": 52.01,
+        "min_us": 38.35,
+        "max_us": 42.21,
+        "sample_us": [
+          41.3,
+          38.86,
+          38.75,
+          42.21,
+          38.35
+        ]
+      },
+      {
+        "name": "bulk.sql_batch_transaction",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 45.53,
+        "median_allocations": 15.01,
+        "min_us": 44.8,
+        "max_us": 48.78,
+        "sample_us": [
+          45.53,
+          48.78,
+          45.41,
+          44.8,
+          47.83
+        ]
+      },
+      {
+        "name": "error.unique_constraint",
+        "kind": "error",
+        "units_per_iteration": 1,
+        "median_us": 30.91,
+        "median_allocations": 95.01,
+        "min_us": 27.53,
+        "max_us": 32.12,
+        "sample_us": [
+          30.91,
+          28.12,
+          32.12,
+          31.06,
+          27.53
+        ]
+      },
+      {
+        "name": "schema.create_drop",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 90.97,
+        "median_allocations": 202.01,
+        "min_us": 87.21,
+        "max_us": 104.0,
+        "sample_us": [
+          88.74,
+          100.45,
+          104.0,
+          90.97,
+          87.21
+        ]
+      },
+      {
+        "name": "connection.checkout",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 0.9,
+        "median_allocations": 0.01,
+        "min_us": 0.85,
+        "max_us": 0.93,
+        "sample_us": [
+          0.87,
+          0.9,
+          0.93,
+          0.9,
+          0.85
+        ]
+      },
+      {
+        "name": "connection.connect_query_disconnect",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 195.1,
+        "median_allocations": 260.3,
+        "min_us": 191.7,
+        "max_us": 259.0,
+        "sample_us": [
+          259.0,
+          193.5,
+          191.7,
+          195.1,
+          199.4
+        ]
+      }
+    ]
+  },
+  "baseline-file": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:37:06Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "wal",
+      "synchronous": 1,
+      "adapter_source_sha256": "1eda62671b39a6aee3d0bbf3046dac34503b83d8a4bd5c5ddb542481ab481c70",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "file",
+      "iterations": 100,
+      "warmup": 10,
+      "samples": 5,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "output": "tmp/performance/baseline-file.json"
+    },
+    "results": [
+      {
+        "name": "ruby.chain_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 16.75,
+        "median_allocations": 75.01,
+        "min_us": 16.39,
+        "max_us": 18.85,
+        "sample_us": [
+          16.75,
+          16.39,
+          17.86,
+          18.85,
+          16.41
+        ]
+      },
+      {
+        "name": "ruby.reused_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 0.3,
+        "median_allocations": 0.01,
+        "min_us": 0.29,
+        "max_us": 0.32,
+        "sample_us": [
+          0.29,
+          0.3,
+          0.32,
+          0.29,
+          0.31
+        ]
+      },
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 52.66,
+        "median_allocations": 155.01,
+        "min_us": 50.11,
+        "max_us": 57.42,
+        "sample_us": [
+          50.57,
+          52.66,
+          57.42,
+          53.49,
+          50.11
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 29.1,
+        "median_allocations": 80.01,
+        "min_us": 27.88,
+        "max_us": 31.12,
+        "sample_us": [
+          27.88,
+          29.61,
+          28.66,
+          29.1,
+          31.12
+        ]
+      },
+      {
+        "name": "read.raw_sql",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 25.26,
+        "median_allocations": 79.01,
+        "min_us": 25.0,
+        "max_us": 27.52,
+        "sample_us": [
+          25.0,
+          25.26,
+          27.52,
+          25.17,
+          25.59
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 22.11,
+        "median_allocations": 69.01,
+        "min_us": 21.58,
+        "max_us": 22.51,
+        "sample_us": [
+          22.08,
+          22.11,
+          22.51,
+          21.58,
+          22.28
+        ]
+      },
+      {
+        "name": "read.primary_key",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 75.26,
+        "median_allocations": 268.02,
+        "min_us": 69.64,
+        "max_us": 80.38,
+        "sample_us": [
+          69.64,
+          74.16,
+          79.42,
+          80.38,
+          75.26
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 37.23,
+        "median_allocations": 116.01,
+        "min_us": 34.76,
+        "max_us": 38.48,
+        "sample_us": [
+          34.76,
+          38.48,
+          38.44,
+          37.23,
+          36.24
+        ]
+      },
+      {
+        "name": "read.get",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.67,
+        "median_allocations": 92.01,
+        "min_us": 34.53,
+        "max_us": 35.31,
+        "sample_us": [
+          34.53,
+          35.31,
+          34.65,
+          34.83,
+          34.67
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 72.45,
+        "median_allocations": 266.03,
+        "min_us": 65.66,
+        "max_us": 80.51,
+        "sample_us": [
+          69.0,
+          80.51,
+          65.66,
+          72.45,
+          72.95
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 36.14,
+        "median_allocations": 115.01,
+        "min_us": 34.77,
+        "max_us": 43.87,
+        "sample_us": [
+          35.31,
+          36.14,
+          34.77,
+          43.87,
+          36.93
+        ]
+      },
+      {
+        "name": "read.db_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 38.83,
+        "median_allocations": 115.02,
+        "min_us": 35.05,
+        "max_us": 43.29,
+        "sample_us": [
+          38.83,
+          39.26,
+          43.29,
+          37.51,
+          35.05
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 33.04,
+        "median_allocations": 141.02,
+        "min_us": 31.59,
+        "max_us": 39.73,
+        "sample_us": [
+          31.59,
+          32.24,
+          33.04,
+          39.73,
+          36.19
+        ]
+      },
+      {
+        "name": "read.narrow_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 6686.22,
+        "median_allocations": 33066.01,
+        "min_us": 6550.5,
+        "max_us": 6971.68,
+        "sample_us": [
+          6686.22,
+          6729.93,
+          6550.5,
+          6653.38,
+          6971.68
+        ]
+      },
+      {
+        "name": "read.typed_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 36928.24,
+        "median_allocations": 155091.02,
+        "min_us": 35993.91,
+        "max_us": 38413.08,
+        "sample_us": [
+          36291.71,
+          37684.11,
+          36928.24,
+          38413.08,
+          35993.91
+        ]
+      },
+      {
+        "name": "read.each",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3708.94,
+        "median_allocations": 18050.01,
+        "min_us": 3624.29,
+        "max_us": 4005.02,
+        "sample_us": [
+          3624.29,
+          3633.65,
+          3708.94,
+          4005.02,
+          3765.25
+        ]
+      },
+      {
+        "name": "read.early_break",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 28.91,
+        "median_allocations": 73.01,
+        "min_us": 28.6,
+        "max_us": 30.22,
+        "sample_us": [
+          28.91,
+          28.98,
+          28.6,
+          28.82,
+          30.22
+        ]
+      },
+      {
+        "name": "read.select_map",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3709.91,
+        "median_allocations": 18062.01,
+        "min_us": 3588.6,
+        "max_us": 3757.24,
+        "sample_us": [
+          3638.46,
+          3757.24,
+          3588.6,
+          3709.91,
+          3713.84
+        ]
+      },
+      {
+        "name": "read.aggregate",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 19.62,
+        "median_allocations": 46.01,
+        "min_us": 19.42,
+        "max_us": 19.88,
+        "sample_us": [
+          19.69,
+          19.88,
+          19.62,
+          19.42,
+          19.45
+        ]
+      },
+      {
+        "name": "read.join",
+        "kind": "read",
+        "units_per_iteration": 10,
+        "median_us": 69.86,
+        "median_allocations": 263.01,
+        "min_us": 66.57,
+        "max_us": 71.11,
+        "sample_us": [
+          69.69,
+          69.86,
+          66.57,
+          71.11,
+          70.05
+        ]
+      },
+      {
+        "name": "model.primary_key",
+        "kind": "model",
+        "units_per_iteration": 1,
+        "median_us": 75.34,
+        "median_allocations": 264.02,
+        "min_us": 72.08,
+        "max_us": 78.16,
+        "sample_us": [
+          74.09,
+          78.16,
+          72.08,
+          77.11,
+          75.34
+        ]
+      },
+      {
+        "name": "model.all",
+        "kind": "model",
+        "units_per_iteration": 1000,
+        "median_us": 36952.36,
+        "median_allocations": 156092.04,
+        "min_us": 36380.34,
+        "max_us": 38611.94,
+        "sample_us": [
+          36380.34,
+          36952.36,
+          37749.29,
+          38611.94,
+          36787.79
+        ]
+      },
+      {
+        "name": "model.n_plus_one",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 889.15,
+        "median_allocations": 2773.02,
+        "min_us": 836.52,
+        "max_us": 1007.76,
+        "sample_us": [
+          836.52,
+          889.15,
+          1007.76,
+          908.25,
+          864.47
+        ]
+      },
+      {
+        "name": "model.eager",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 514.49,
+        "median_allocations": 2122.04,
+        "min_us": 497.93,
+        "max_us": 550.05,
+        "sample_us": [
+          497.93,
+          532.7,
+          550.05,
+          504.61,
+          514.49
+        ]
+      },
+      {
+        "name": "schema.cached",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 1.57,
+        "median_allocations": 7.01,
+        "min_us": 1.38,
+        "max_us": 2.49,
+        "sample_us": [
+          2.49,
+          1.53,
+          1.38,
+          1.63,
+          1.57
+        ]
+      },
+      {
+        "name": "schema.reload",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 162.59,
+        "median_allocations": 840.01,
+        "min_us": 160.28,
+        "max_us": 184.32,
+        "sample_us": [
+          161.2,
+          164.93,
+          160.28,
+          184.32,
+          162.59
+        ]
+      },
+      {
+        "name": "native.pooled_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 11.16,
+        "median_allocations": 37.01,
+        "min_us": 10.66,
+        "max_us": 13.05,
+        "sample_us": [
+          10.66,
+          11.29,
+          10.88,
+          11.16,
+          13.05
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 12.68,
+        "median_allocations": 49.01,
+        "min_us": 12.3,
+        "max_us": 12.78,
+        "sample_us": [
+          12.68,
+          12.68,
+          12.3,
+          12.78,
+          12.52
+        ]
+      },
+      {
+        "name": "write.insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 40.58,
+        "median_allocations": 27.01,
+        "min_us": 40.2,
+        "max_us": 52.17,
+        "sample_us": [
+          40.35,
+          40.2,
+          40.58,
+          42.87,
+          52.17
+        ]
+      },
+      {
+        "name": "write.bound_insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 41.23,
+        "median_allocations": 43.02,
+        "min_us": 39.43,
+        "max_us": 44.29,
+        "sample_us": [
+          41.23,
+          44.29,
+          43.07,
+          40.36,
+          39.43
+        ]
+      },
+      {
+        "name": "write.update",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 30.39,
+        "median_allocations": 42.01,
+        "min_us": 30.03,
+        "max_us": 34.77,
+        "sample_us": [
+          34.77,
+          30.39,
+          30.09,
+          30.03,
+          31.36
+        ]
+      },
+      {
+        "name": "write.delete",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 35.64,
+        "median_allocations": 32.01,
+        "min_us": 33.68,
+        "max_us": 57.98,
+        "sample_us": [
+          35.38,
+          35.64,
+          57.98,
+          48.88,
+          33.68
+        ]
+      },
+      {
+        "name": "write.returning",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 69.69,
+        "median_allocations": 84.01,
+        "min_us": 60.91,
+        "max_us": 75.56,
+        "sample_us": [
+          60.91,
+          72.47,
+          69.69,
+          63.58,
+          75.56
+        ]
+      },
+      {
+        "name": "write.upsert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 51.64,
+        "median_allocations": 40.01,
+        "min_us": 42.6,
+        "max_us": 56.36,
+        "sample_us": [
+          42.6,
+          56.36,
+          43.51,
+          55.4,
+          51.64
+        ]
+      },
+      {
+        "name": "transaction.commit",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 50.8,
+        "median_allocations": 40.01,
+        "min_us": 48.68,
+        "max_us": 68.27,
+        "sample_us": [
+          49.46,
+          68.27,
+          48.68,
+          50.8,
+          60.07
+        ]
+      },
+      {
+        "name": "transaction.rollback",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 32.53,
+        "median_allocations": 43.01,
+        "min_us": 31.12,
+        "max_us": 34.17,
+        "sample_us": [
+          31.12,
+          32.53,
+          34.17,
+          32.22,
+          33.42
+        ]
+      },
+      {
+        "name": "transaction.savepoint",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 85.27,
+        "median_allocations": 84.01,
+        "min_us": 75.38,
+        "max_us": 94.22,
+        "sample_us": [
+          94.22,
+          85.27,
+          80.8,
+          85.35,
+          75.38
+        ]
+      },
+      {
+        "name": "bulk.autocommit_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 874.28,
+        "median_allocations": 540.01,
+        "min_us": 839.18,
+        "max_us": 905.5,
+        "sample_us": [
+          855.51,
+          839.18,
+          874.28,
+          874.28,
+          905.5
+        ]
+      },
+      {
+        "name": "bulk.transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 312.56,
+        "median_allocations": 553.01,
+        "min_us": 305.8,
+        "max_us": 324.99,
+        "sample_us": [
+          307.22,
+          324.99,
+          312.56,
+          324.17,
+          305.8
+        ]
+      },
+      {
+        "name": "bulk.prepared_transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 335.47,
+        "median_allocations": 873.01,
+        "min_us": 323.79,
+        "max_us": 347.03,
+        "sample_us": [
+          334.03,
+          336.14,
+          335.47,
+          347.03,
+          323.79
+        ]
+      },
+      {
+        "name": "bulk.import",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 76.86,
+        "median_allocations": 52.01,
+        "min_us": 65.06,
+        "max_us": 90.6,
+        "sample_us": [
+          65.06,
+          76.86,
+          90.6,
+          83.44,
+          67.58
+        ]
+      },
+      {
+        "name": "bulk.sql_batch_transaction",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 87.74,
+        "median_allocations": 17.01,
+        "min_us": 74.28,
+        "max_us": 106.65,
+        "sample_us": [
+          106.65,
+          87.74,
+          76.53,
+          89.65,
+          74.28
+        ]
+      },
+      {
+        "name": "error.unique_constraint",
+        "kind": "error",
+        "units_per_iteration": 1,
+        "median_us": 32.23,
+        "median_allocations": 96.01,
+        "min_us": 31.06,
+        "max_us": 32.94,
+        "sample_us": [
+          31.19,
+          32.34,
+          31.06,
+          32.23,
+          32.94
+        ]
+      },
+      {
+        "name": "schema.create_drop",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 214.5,
+        "median_allocations": 202.01,
+        "min_us": 198.67,
+        "max_us": 232.65,
+        "sample_us": [
+          232.6,
+          198.67,
+          232.65,
+          206.72,
+          214.5
+        ]
+      },
+      {
+        "name": "connection.checkout",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 0.92,
+        "median_allocations": 0.01,
+        "min_us": 0.86,
+        "max_us": 1.58,
+        "sample_us": [
+          1.58,
+          0.86,
+          1.53,
+          0.92,
+          0.89
+        ]
+      },
+      {
+        "name": "connection.connect_query_disconnect",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 353.8,
+        "median_allocations": 264.3,
+        "min_us": 341.3,
+        "max_us": 384.5,
+        "sample_us": [
+          358.0,
+          351.9,
+          341.3,
+          384.5,
+          353.8
+        ]
+      },
+      {
+        "name": "connection.serial_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 896.91,
+        "median_allocations": 2762.01,
+        "min_us": 870.66,
+        "max_us": 912.24,
+        "sample_us": [
+          912.24,
+          870.66,
+          901.01,
+          896.91,
+          886.76
+        ]
+      },
+      {
+        "name": "connection.held_pool_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 892.93,
+        "median_allocations": 2762.01,
+        "min_us": 833.86,
+        "max_us": 1210.46,
+        "sample_us": [
+          865.53,
+          909.73,
+          1210.46,
+          892.93,
+          833.86
+        ]
+      },
+      {
+        "name": "connection.concurrent_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 1456.25,
+        "median_allocations": 2771.01,
+        "min_us": 1350.79,
+        "max_us": 1900.42,
+        "sample_us": [
+          1380.44,
+          1521.35,
+          1456.25,
+          1900.42,
+          1350.79
+        ]
+      }
+    ]
+  },
+  "optimized-file": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:39:21Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "wal",
+      "synchronous": 1,
+      "adapter_source_sha256": "d0353b81ff3b8941c8d655633fe8e0c5cd04218ee07fbc4542a9a6d90804a430",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "file",
+      "iterations": 100,
+      "warmup": 10,
+      "samples": 5,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "output": "tmp/performance/optimized-file.json"
+    },
+    "results": [
+      {
+        "name": "ruby.chain_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 17.56,
+        "median_allocations": 75.01,
+        "min_us": 16.41,
+        "max_us": 19.0,
+        "sample_us": [
+          18.23,
+          16.41,
+          17.56,
+          19.0,
+          16.99
+        ]
+      },
+      {
+        "name": "ruby.reused_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 0.31,
+        "median_allocations": 0.01,
+        "min_us": 0.3,
+        "max_us": 0.32,
+        "sample_us": [
+          0.32,
+          0.3,
+          0.31,
+          0.31,
+          0.31
+        ]
+      },
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 51.33,
+        "median_allocations": 153.01,
+        "min_us": 49.04,
+        "max_us": 53.48,
+        "sample_us": [
+          49.04,
+          50.67,
+          53.48,
+          51.33,
+          52.46
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 29.85,
+        "median_allocations": 78.01,
+        "min_us": 27.3,
+        "max_us": 31.4,
+        "sample_us": [
+          27.3,
+          31.4,
+          28.12,
+          29.85,
+          30.72
+        ]
+      },
+      {
+        "name": "read.raw_sql",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 24.5,
+        "median_allocations": 77.01,
+        "min_us": 23.47,
+        "max_us": 25.98,
+        "sample_us": [
+          23.47,
+          24.89,
+          24.5,
+          24.48,
+          25.98
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 22.46,
+        "median_allocations": 67.01,
+        "min_us": 21.73,
+        "max_us": 23.33,
+        "sample_us": [
+          23.33,
+          21.73,
+          22.46,
+          21.79,
+          22.91
+        ]
+      },
+      {
+        "name": "read.primary_key",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 70.0,
+        "median_allocations": 262.02,
+        "min_us": 67.74,
+        "max_us": 71.7,
+        "sample_us": [
+          67.74,
+          68.38,
+          71.7,
+          71.18,
+          70.0
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 36.41,
+        "median_allocations": 117.01,
+        "min_us": 36.07,
+        "max_us": 38.06,
+        "sample_us": [
+          37.01,
+          36.41,
+          38.06,
+          36.07,
+          36.15
+        ]
+      },
+      {
+        "name": "read.get",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 33.59,
+        "median_allocations": 90.01,
+        "min_us": 33.4,
+        "max_us": 33.73,
+        "sample_us": [
+          33.65,
+          33.4,
+          33.73,
+          33.59,
+          33.54
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 66.8,
+        "median_allocations": 258.03,
+        "min_us": 63.46,
+        "max_us": 73.65,
+        "sample_us": [
+          71.83,
+          73.65,
+          64.85,
+          66.8,
+          63.46
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.37,
+        "median_allocations": 107.01,
+        "min_us": 33.06,
+        "max_us": 40.07,
+        "sample_us": [
+          34.08,
+          40.07,
+          33.06,
+          34.37,
+          34.96
+        ]
+      },
+      {
+        "name": "read.db_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.91,
+        "median_allocations": 107.02,
+        "min_us": 33.61,
+        "max_us": 38.69,
+        "sample_us": [
+          34.35,
+          38.69,
+          33.61,
+          35.13,
+          34.91
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 31.77,
+        "median_allocations": 130.02,
+        "min_us": 30.52,
+        "max_us": 33.49,
+        "sample_us": [
+          30.52,
+          31.77,
+          33.49,
+          30.7,
+          31.96
+        ]
+      },
+      {
+        "name": "read.narrow_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 6073.87,
+        "median_allocations": 30067.01,
+        "min_us": 5998.54,
+        "max_us": 6163.97,
+        "sample_us": [
+          6073.87,
+          6152.65,
+          5998.54,
+          6027.7,
+          6163.97
+        ]
+      },
+      {
+        "name": "read.typed_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 34078.55,
+        "median_allocations": 148092.02,
+        "min_us": 33855.52,
+        "max_us": 34436.51,
+        "sample_us": [
+          34436.51,
+          33855.52,
+          34093.55,
+          34007.71,
+          34078.55
+        ]
+      },
+      {
+        "name": "read.each",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3417.08,
+        "median_allocations": 15051.01,
+        "min_us": 3392.56,
+        "max_us": 3467.49,
+        "sample_us": [
+          3448.32,
+          3467.49,
+          3392.56,
+          3396.15,
+          3417.08
+        ]
+      },
+      {
+        "name": "read.early_break",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 28.76,
+        "median_allocations": 71.01,
+        "min_us": 27.87,
+        "max_us": 29.86,
+        "sample_us": [
+          27.87,
+          28.55,
+          28.76,
+          29.85,
+          29.86
+        ]
+      },
+      {
+        "name": "read.select_map",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 3481.18,
+        "median_allocations": 15063.01,
+        "min_us": 3431.62,
+        "max_us": 3581.38,
+        "sample_us": [
+          3431.62,
+          3581.38,
+          3446.07,
+          3545.11,
+          3481.18
+        ]
+      },
+      {
+        "name": "read.aggregate",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 19.28,
+        "median_allocations": 44.01,
+        "min_us": 18.9,
+        "max_us": 20.82,
+        "sample_us": [
+          19.21,
+          20.82,
+          20.7,
+          18.9,
+          19.28
+        ]
+      },
+      {
+        "name": "read.join",
+        "kind": "read",
+        "units_per_iteration": 10,
+        "median_us": 65.92,
+        "median_allocations": 234.01,
+        "min_us": 62.83,
+        "max_us": 72.16,
+        "sample_us": [
+          65.92,
+          62.83,
+          72.16,
+          66.84,
+          64.78
+        ]
+      },
+      {
+        "name": "model.primary_key",
+        "kind": "model",
+        "units_per_iteration": 1,
+        "median_us": 75.82,
+        "median_allocations": 258.02,
+        "min_us": 72.11,
+        "max_us": 77.11,
+        "sample_us": [
+          76.38,
+          75.82,
+          77.11,
+          72.47,
+          72.11
+        ]
+      },
+      {
+        "name": "model.all",
+        "kind": "model",
+        "units_per_iteration": 1000,
+        "median_us": 34353.51,
+        "median_allocations": 149093.04,
+        "min_us": 33863.93,
+        "max_us": 34612.41,
+        "sample_us": [
+          34612.41,
+          33863.93,
+          34353.51,
+          34434.93,
+          34101.49
+        ]
+      },
+      {
+        "name": "model.n_plus_one",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 863.26,
+        "median_allocations": 2664.02,
+        "min_us": 816.53,
+        "max_us": 871.21,
+        "sample_us": [
+          816.53,
+          863.26,
+          832.06,
+          871.21,
+          863.36
+        ]
+      },
+      {
+        "name": "model.eager",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 479.92,
+        "median_allocations": 2004.04,
+        "min_us": 474.05,
+        "max_us": 559.4,
+        "sample_us": [
+          474.05,
+          476.68,
+          559.4,
+          502.08,
+          479.92
+        ]
+      },
+      {
+        "name": "schema.cached",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 1.43,
+        "median_allocations": 7.01,
+        "min_us": 1.38,
+        "max_us": 1.44,
+        "sample_us": [
+          1.41,
+          1.44,
+          1.43,
+          1.38,
+          1.44
+        ]
+      },
+      {
+        "name": "schema.reload",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 146.64,
+        "median_allocations": 769.01,
+        "min_us": 145.16,
+        "max_us": 158.84,
+        "sample_us": [
+          146.46,
+          146.64,
+          145.16,
+          148.76,
+          158.84
+        ]
+      },
+      {
+        "name": "native.pooled_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 10.89,
+        "median_allocations": 34.01,
+        "min_us": 10.41,
+        "max_us": 12.48,
+        "sample_us": [
+          10.41,
+          10.89,
+          12.48,
+          10.55,
+          11.61
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 11.78,
+        "median_allocations": 40.01,
+        "min_us": 11.7,
+        "max_us": 12.56,
+        "sample_us": [
+          11.7,
+          11.78,
+          11.76,
+          12.05,
+          12.56
+        ]
+      },
+      {
+        "name": "write.insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 42.67,
+        "median_allocations": 27.01,
+        "min_us": 38.99,
+        "max_us": 57.7,
+        "sample_us": [
+          42.88,
+          38.99,
+          40.41,
+          42.67,
+          57.7
+        ]
+      },
+      {
+        "name": "write.bound_insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 40.06,
+        "median_allocations": 37.02,
+        "min_us": 39.24,
+        "max_us": 40.99,
+        "sample_us": [
+          40.06,
+          39.24,
+          39.72,
+          40.99,
+          40.35
+        ]
+      },
+      {
+        "name": "write.update",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 30.01,
+        "median_allocations": 42.01,
+        "min_us": 29.67,
+        "max_us": 33.02,
+        "sample_us": [
+          29.83,
+          33.02,
+          30.34,
+          29.67,
+          30.01
+        ]
+      },
+      {
+        "name": "write.delete",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 35.76,
+        "median_allocations": 32.01,
+        "min_us": 33.97,
+        "max_us": 47.12,
+        "sample_us": [
+          35.6,
+          35.76,
+          47.0,
+          47.12,
+          33.97
+        ]
+      },
+      {
+        "name": "write.returning",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 64.38,
+        "median_allocations": 82.01,
+        "min_us": 61.97,
+        "max_us": 77.66,
+        "sample_us": [
+          64.38,
+          62.97,
+          77.66,
+          61.97,
+          73.85
+        ]
+      },
+      {
+        "name": "write.upsert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 50.59,
+        "median_allocations": 39.01,
+        "min_us": 38.91,
+        "max_us": 58.54,
+        "sample_us": [
+          38.91,
+          57.73,
+          42.01,
+          58.54,
+          50.59
+        ]
+      },
+      {
+        "name": "transaction.commit",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 50.95,
+        "median_allocations": 38.01,
+        "min_us": 48.15,
+        "max_us": 61.92,
+        "sample_us": [
+          48.15,
+          61.92,
+          54.49,
+          49.73,
+          50.95
+        ]
+      },
+      {
+        "name": "transaction.rollback",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 31.7,
+        "median_allocations": 41.01,
+        "min_us": 30.39,
+        "max_us": 35.6,
+        "sample_us": [
+          30.39,
+          31.31,
+          31.7,
+          35.6,
+          33.2
+        ]
+      },
+      {
+        "name": "transaction.savepoint",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 80.67,
+        "median_allocations": 82.01,
+        "min_us": 76.76,
+        "max_us": 90.05,
+        "sample_us": [
+          90.05,
+          85.23,
+          76.76,
+          80.67,
+          78.77
+        ]
+      },
+      {
+        "name": "bulk.autocommit_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 851.58,
+        "median_allocations": 540.01,
+        "min_us": 832.96,
+        "max_us": 926.18,
+        "sample_us": [
+          838.27,
+          832.96,
+          926.18,
+          851.58,
+          875.95
+        ]
+      },
+      {
+        "name": "bulk.transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 311.67,
+        "median_allocations": 551.01,
+        "min_us": 290.97,
+        "max_us": 320.82,
+        "sample_us": [
+          319.21,
+          303.66,
+          290.97,
+          311.67,
+          320.82
+        ]
+      },
+      {
+        "name": "bulk.prepared_transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 321.74,
+        "median_allocations": 751.01,
+        "min_us": 312.94,
+        "max_us": 330.29,
+        "sample_us": [
+          324.21,
+          321.74,
+          312.94,
+          321.25,
+          330.29
+        ]
+      },
+      {
+        "name": "bulk.import",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 69.66,
+        "median_allocations": 52.01,
+        "min_us": 63.93,
+        "max_us": 93.04,
+        "sample_us": [
+          63.93,
+          69.66,
+          93.04,
+          84.26,
+          67.65
+        ]
+      },
+      {
+        "name": "bulk.sql_batch_transaction",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 87.98,
+        "median_allocations": 15.01,
+        "min_us": 74.21,
+        "max_us": 92.96,
+        "sample_us": [
+          92.96,
+          91.87,
+          74.21,
+          87.98,
+          75.19
+        ]
+      },
+      {
+        "name": "error.unique_constraint",
+        "kind": "error",
+        "units_per_iteration": 1,
+        "median_us": 32.15,
+        "median_allocations": 95.01,
+        "min_us": 30.81,
+        "max_us": 35.19,
+        "sample_us": [
+          35.19,
+          32.11,
+          32.15,
+          33.36,
+          30.81
+        ]
+      },
+      {
+        "name": "schema.create_drop",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 234.11,
+        "median_allocations": 202.01,
+        "min_us": 202.75,
+        "max_us": 245.79,
+        "sample_us": [
+          245.79,
+          202.75,
+          234.52,
+          223.0,
+          234.11
+        ]
+      },
+      {
+        "name": "connection.checkout",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 0.9,
+        "median_allocations": 0.01,
+        "min_us": 0.87,
+        "max_us": 0.96,
+        "sample_us": [
+          0.96,
+          0.93,
+          0.88,
+          0.9,
+          0.87
+        ]
+      },
+      {
+        "name": "connection.connect_query_disconnect",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 353.4,
+        "median_allocations": 261.3,
+        "min_us": 338.3,
+        "max_us": 420.0,
+        "sample_us": [
+          356.3,
+          351.6,
+          338.3,
+          420.0,
+          353.4
+        ]
+      },
+      {
+        "name": "connection.serial_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 900.63,
+        "median_allocations": 2682.01,
+        "min_us": 885.92,
+        "max_us": 941.86,
+        "sample_us": [
+          900.63,
+          885.92,
+          902.6,
+          899.66,
+          941.86
+        ]
+      },
+      {
+        "name": "connection.held_pool_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 880.46,
+        "median_allocations": 2682.01,
+        "min_us": 870.63,
+        "max_us": 889.07,
+        "sample_us": [
+          886.28,
+          870.79,
+          870.63,
+          889.07,
+          880.46
+        ]
+      },
+      {
+        "name": "connection.concurrent_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 1415.05,
+        "median_allocations": 2691.01,
+        "min_us": 1362.87,
+        "max_us": 1656.58,
+        "sample_us": [
+          1362.87,
+          1428.16,
+          1415.05,
+          1398.87,
+          1656.58
+        ]
+      }
+    ]
+  },
+  "sqlite-file": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:40:19Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.54.1",
+      "journal_mode": "wal",
+      "synchronous": 1,
+      "adapter_source_sha256": "d0353b81ff3b8941c8d655633fe8e0c5cd04218ee07fbc4542a9a6d90804a430",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "sqlite",
+      "storage": "file",
+      "iterations": 100,
+      "warmup": 10,
+      "samples": 5,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "output": "tmp/performance/sqlite-file.json"
+    },
+    "results": [
+      {
+        "name": "ruby.chain_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 17.36,
+        "median_allocations": 75.01,
+        "min_us": 16.84,
+        "max_us": 18.68,
+        "sample_us": [
+          18.68,
+          17.36,
+          18.2,
+          17.03,
+          16.84
+        ]
+      },
+      {
+        "name": "ruby.reused_sql",
+        "kind": "ruby",
+        "units_per_iteration": 1,
+        "median_us": 0.33,
+        "median_allocations": 0.01,
+        "min_us": 0.3,
+        "max_us": 0.42,
+        "sample_us": [
+          0.32,
+          0.42,
+          0.33,
+          0.3,
+          0.35
+        ]
+      },
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 31.23,
+        "median_allocations": 103.02,
+        "min_us": 29.59,
+        "max_us": 35.94,
+        "sample_us": [
+          33.98,
+          35.94,
+          29.59,
+          30.53,
+          31.23
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 11.05,
+        "median_allocations": 28.01,
+        "min_us": 10.84,
+        "max_us": 11.23,
+        "sample_us": [
+          11.05,
+          11.1,
+          11.23,
+          10.84,
+          11.01
+        ]
+      },
+      {
+        "name": "read.raw_sql",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 12.57,
+        "median_allocations": 37.02,
+        "min_us": 12.16,
+        "max_us": 13.29,
+        "sample_us": [
+          12.5,
+          13.29,
+          12.16,
+          12.57,
+          13.23
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 7.64,
+        "median_allocations": 27.02,
+        "min_us": 7.32,
+        "max_us": 8.78,
+        "sample_us": [
+          8.78,
+          7.92,
+          7.35,
+          7.32,
+          7.64
+        ]
+      },
+      {
+        "name": "read.primary_key",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 43.21,
+        "median_allocations": 129.08,
+        "min_us": 40.35,
+        "max_us": 44.04,
+        "sample_us": [
+          40.35,
+          42.46,
+          43.77,
+          43.21,
+          44.04
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 25.89,
+        "median_allocations": 78.06,
+        "min_us": 24.51,
+        "max_us": 29.44,
+        "sample_us": [
+          24.51,
+          25.89,
+          29.44,
+          27.9,
+          25.43
+        ]
+      },
+      {
+        "name": "read.get",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 21.28,
+        "median_allocations": 60.02,
+        "min_us": 20.92,
+        "max_us": 21.71,
+        "sample_us": [
+          21.71,
+          21.28,
+          21.02,
+          20.92,
+          21.59
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 51.22,
+        "median_allocations": 209.05,
+        "min_us": 43.49,
+        "max_us": 59.8,
+        "sample_us": [
+          51.22,
+          43.49,
+          52.66,
+          59.8,
+          47.98
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 13.21,
+        "median_allocations": 51.11,
+        "min_us": 12.88,
+        "max_us": 13.41,
+        "sample_us": [
+          12.88,
+          13.41,
+          13.34,
+          12.91,
+          13.21
+        ]
+      },
+      {
+        "name": "read.db_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 13.95,
+        "median_allocations": 51.11,
+        "min_us": 12.56,
+        "max_us": 15.09,
+        "sample_us": [
+          13.95,
+          12.56,
+          15.09,
+          14.06,
+          13.59
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 12.58,
+        "median_allocations": 56.12,
+        "min_us": 11.86,
+        "max_us": 15.39,
+        "sample_us": [
+          12.35,
+          13.54,
+          15.39,
+          12.58,
+          11.86
+        ]
+      },
+      {
+        "name": "read.narrow_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 601.48,
+        "median_allocations": 3044.02,
+        "min_us": 583.1,
+        "max_us": 614.0,
+        "sample_us": [
+          601.48,
+          610.98,
+          585.28,
+          614.0,
+          583.1
+        ]
+      },
+      {
+        "name": "read.typed_all",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 13235.9,
+        "median_allocations": 50053.08,
+        "min_us": 12897.17,
+        "max_us": 13418.5,
+        "sample_us": [
+          12897.17,
+          13064.76,
+          13316.93,
+          13418.5,
+          13235.9
+        ]
+      },
+      {
+        "name": "read.each",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 423.71,
+        "median_allocations": 2030.02,
+        "min_us": 397.77,
+        "max_us": 430.88,
+        "sample_us": [
+          421.6,
+          397.77,
+          430.88,
+          427.36,
+          423.71
+        ]
+      },
+      {
+        "name": "read.early_break",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 15.62,
+        "median_allocations": 41.02,
+        "min_us": 14.85,
+        "max_us": 16.59,
+        "sample_us": [
+          15.38,
+          15.89,
+          16.59,
+          14.85,
+          15.62
+        ]
+      },
+      {
+        "name": "read.select_map",
+        "kind": "read",
+        "units_per_iteration": 1000,
+        "median_us": 436.09,
+        "median_allocations": 2042.02,
+        "min_us": 422.54,
+        "max_us": 449.61,
+        "sample_us": [
+          444.7,
+          422.54,
+          449.61,
+          433.54,
+          436.09
+        ]
+      },
+      {
+        "name": "read.aggregate",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 9.1,
+        "median_allocations": 21.02,
+        "min_us": 8.74,
+        "max_us": 9.53,
+        "sample_us": [
+          8.96,
+          9.1,
+          8.74,
+          9.53,
+          9.14
+        ]
+      },
+      {
+        "name": "read.join",
+        "kind": "read",
+        "units_per_iteration": 10,
+        "median_us": 37.43,
+        "median_allocations": 92.02,
+        "min_us": 33.56,
+        "max_us": 39.33,
+        "sample_us": [
+          33.56,
+          38.61,
+          37.43,
+          36.6,
+          39.33
+        ]
+      },
+      {
+        "name": "model.primary_key",
+        "kind": "model",
+        "units_per_iteration": 1,
+        "median_us": 29.92,
+        "median_allocations": 95.07,
+        "min_us": 29.39,
+        "max_us": 32.46,
+        "sample_us": [
+          29.75,
+          29.92,
+          29.39,
+          32.46,
+          30.12
+        ]
+      },
+      {
+        "name": "model.all",
+        "kind": "model",
+        "units_per_iteration": 1000,
+        "median_us": 13520.9,
+        "median_allocations": 51054.1,
+        "min_us": 13084.97,
+        "max_us": 13598.8,
+        "sample_us": [
+          13084.97,
+          13598.8,
+          13558.08,
+          13486.27,
+          13520.9
+        ]
+      },
+      {
+        "name": "model.n_plus_one",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 336.45,
+        "median_allocations": 945.13,
+        "min_us": 313.88,
+        "max_us": 347.39,
+        "sample_us": [
+          313.88,
+          347.39,
+          322.59,
+          336.45,
+          346.62
+        ]
+      },
+      {
+        "name": "model.eager",
+        "kind": "model",
+        "units_per_iteration": 10,
+        "median_us": 224.98,
+        "median_allocations": 726.1,
+        "min_us": 224.25,
+        "max_us": 238.41,
+        "sample_us": [
+          224.98,
+          224.95,
+          238.41,
+          224.25,
+          231.26
+        ]
+      },
+      {
+        "name": "schema.cached",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 1.44,
+        "median_allocations": 7.01,
+        "min_us": 1.36,
+        "max_us": 1.54,
+        "sample_us": [
+          1.44,
+          1.36,
+          1.53,
+          1.37,
+          1.54
+        ]
+      },
+      {
+        "name": "schema.reload",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 49.37,
+        "median_allocations": 121.04,
+        "min_us": 47.5,
+        "max_us": 51.2,
+        "sample_us": [
+          47.5,
+          51.2,
+          49.37,
+          50.48,
+          48.0
+        ]
+      },
+      {
+        "name": "write.insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 32.14,
+        "median_allocations": 26.01,
+        "min_us": 29.54,
+        "max_us": 41.73,
+        "sample_us": [
+          41.73,
+          32.14,
+          29.54,
+          30.96,
+          32.59
+        ]
+      },
+      {
+        "name": "write.bound_insert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 32.13,
+        "median_allocations": 34.09,
+        "min_us": 29.86,
+        "max_us": 44.68,
+        "sample_us": [
+          29.86,
+          32.13,
+          30.88,
+          44.68,
+          42.05
+        ]
+      },
+      {
+        "name": "write.update",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 24.53,
+        "median_allocations": 43.01,
+        "min_us": 23.78,
+        "max_us": 43.43,
+        "sample_us": [
+          27.22,
+          24.53,
+          23.78,
+          23.93,
+          43.43
+        ]
+      },
+      {
+        "name": "write.delete",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 28.3,
+        "median_allocations": 33.01,
+        "min_us": 26.64,
+        "max_us": 42.55,
+        "sample_us": [
+          27.84,
+          32.74,
+          26.64,
+          42.55,
+          28.3
+        ]
+      },
+      {
+        "name": "write.returning",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 56.96,
+        "median_allocations": 47.02,
+        "min_us": 41.24,
+        "max_us": 57.59,
+        "sample_us": [
+          41.24,
+          56.96,
+          57.59,
+          57.52,
+          41.85
+        ]
+      },
+      {
+        "name": "write.upsert",
+        "kind": "write",
+        "units_per_iteration": 1,
+        "median_us": 32.02,
+        "median_allocations": 38.01,
+        "min_us": 30.66,
+        "max_us": 44.95,
+        "sample_us": [
+          44.95,
+          30.66,
+          35.41,
+          32.02,
+          30.95
+        ]
+      },
+      {
+        "name": "transaction.commit",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 41.0,
+        "median_allocations": 55.01,
+        "min_us": 39.45,
+        "max_us": 41.95,
+        "sample_us": [
+          39.45,
+          41.95,
+          41.92,
+          40.36,
+          41.0
+        ]
+      },
+      {
+        "name": "transaction.rollback",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 25.99,
+        "median_allocations": 58.01,
+        "min_us": 24.3,
+        "max_us": 29.89,
+        "sample_us": [
+          25.99,
+          24.3,
+          29.14,
+          29.89,
+          24.5
+        ]
+      },
+      {
+        "name": "transaction.savepoint",
+        "kind": "transaction",
+        "units_per_iteration": 1,
+        "median_us": 63.94,
+        "median_allocations": 114.01,
+        "min_us": 59.63,
+        "max_us": 69.16,
+        "sample_us": [
+          69.03,
+          63.94,
+          59.63,
+          63.01,
+          69.16
+        ]
+      },
+      {
+        "name": "bulk.autocommit_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 682.94,
+        "median_allocations": 520.01,
+        "min_us": 664.02,
+        "max_us": 688.74,
+        "sample_us": [
+          664.02,
+          688.74,
+          687.12,
+          682.76,
+          682.94
+        ]
+      },
+      {
+        "name": "bulk.transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 219.07,
+        "median_allocations": 549.01,
+        "min_us": 212.33,
+        "max_us": 283.68,
+        "sample_us": [
+          212.33,
+          223.62,
+          283.68,
+          218.27,
+          219.07
+        ]
+      },
+      {
+        "name": "bulk.prepared_transaction_loop",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 206.78,
+        "median_allocations": 709.08,
+        "min_us": 184.04,
+        "max_us": 214.18,
+        "sample_us": [
+          197.1,
+          184.04,
+          210.23,
+          214.18,
+          206.78
+        ]
+      },
+      {
+        "name": "bulk.import",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 66.89,
+        "median_allocations": 53.01,
+        "min_us": 60.68,
+        "max_us": 69.18,
+        "sample_us": [
+          68.13,
+          69.18,
+          66.44,
+          60.68,
+          66.89
+        ]
+      },
+      {
+        "name": "bulk.sql_batch_transaction",
+        "kind": "bulk",
+        "units_per_iteration": 20,
+        "median_us": 93.96,
+        "median_allocations": 178.01,
+        "min_us": 83.79,
+        "max_us": 101.85,
+        "sample_us": [
+          83.79,
+          95.27,
+          101.85,
+          85.15,
+          93.96
+        ]
+      },
+      {
+        "name": "error.unique_constraint",
+        "kind": "error",
+        "units_per_iteration": 1,
+        "median_us": 28.74,
+        "median_allocations": 103.01,
+        "min_us": 27.89,
+        "max_us": 30.42,
+        "sample_us": [
+          28.74,
+          30.42,
+          29.98,
+          28.46,
+          27.89
+        ]
+      },
+      {
+        "name": "schema.create_drop",
+        "kind": "schema",
+        "units_per_iteration": 1,
+        "median_us": 130.73,
+        "median_allocations": 265.01,
+        "min_us": 111.69,
+        "max_us": 140.45,
+        "sample_us": [
+          140.45,
+          117.67,
+          111.69,
+          130.73,
+          140.22
+        ]
+      },
+      {
+        "name": "connection.checkout",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 0.86,
+        "median_allocations": 0.01,
+        "min_us": 0.84,
+        "max_us": 0.89,
+        "sample_us": [
+          0.84,
+          0.86,
+          0.88,
+          0.86,
+          0.89
+        ]
+      },
+      {
+        "name": "connection.connect_query_disconnect",
+        "kind": "connection",
+        "units_per_iteration": 1,
+        "median_us": 193.4,
+        "median_allocations": 222.5,
+        "min_us": 175.2,
+        "max_us": 209.5,
+        "sample_us": [
+          204.6,
+          175.2,
+          209.5,
+          191.9,
+          193.4
+        ]
+      },
+      {
+        "name": "connection.serial_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 299.3,
+        "median_allocations": 1082.03,
+        "min_us": 291.52,
+        "max_us": 320.33,
+        "sample_us": [
+          291.52,
+          292.22,
+          320.33,
+          299.3,
+          304.8
+        ]
+      },
+      {
+        "name": "connection.held_pool_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 271.7,
+        "median_allocations": 1082.03,
+        "min_us": 261.46,
+        "max_us": 281.01,
+        "sample_us": [
+          261.46,
+          281.01,
+          271.7,
+          269.03,
+          274.05
+        ]
+      },
+      {
+        "name": "connection.concurrent_reads",
+        "kind": "connection",
+        "units_per_iteration": 40,
+        "median_us": 348.75,
+        "median_allocations": 1091.03,
+        "min_us": 327.25,
+        "max_us": 393.16,
+        "sample_us": [
+          327.25,
+          348.75,
+          380.11,
+          393.16,
+          344.8
+        ]
+      }
+    ]
+  },
+  "focused-before": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:40:46Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "memory",
+      "synchronous": 1,
+      "adapter_source_sha256": "1eda62671b39a6aee3d0bbf3046dac34503b83d8a4bd5c5ddb542481ab481c70",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "memory",
+      "iterations": 2000,
+      "warmup": 100,
+      "samples": 7,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "filter": "^(read\\.(chain|reused_dataset|missing|scalar|prepared|bound_call|bound_values)|native\\.bound_query)$",
+      "output": "tmp/performance/focused-before.json"
+    },
+    "results": [
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 51.348,
+        "median_allocations": 155.0005,
+        "min_us": 48.681,
+        "max_us": 55.055,
+        "sample_us": [
+          48.681,
+          55.055,
+          52.342,
+          50.342,
+          52.0605,
+          51.05,
+          51.348
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 27.133,
+        "median_allocations": 80.0005,
+        "min_us": 26.56,
+        "max_us": 27.5455,
+        "sample_us": [
+          27.5455,
+          27.4415,
+          27.133,
+          26.56,
+          26.587,
+          26.9895,
+          27.3795
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 22.9125,
+        "median_allocations": 69.001,
+        "min_us": 22.562,
+        "max_us": 23.2465,
+        "sample_us": [
+          23.025,
+          23.2265,
+          23.2465,
+          22.562,
+          22.9125,
+          22.7095,
+          22.769
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 36.1545,
+        "median_allocations": 116.0005,
+        "min_us": 35.0245,
+        "max_us": 39.4205,
+        "sample_us": [
+          38.385,
+          39.4205,
+          36.1545,
+          35.0245,
+          36.146,
+          35.165,
+          36.812
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 70.873,
+        "median_allocations": 266.0005,
+        "min_us": 67.489,
+        "max_us": 73.346,
+        "sample_us": [
+          71.891,
+          73.346,
+          72.8935,
+          67.489,
+          70.609,
+          70.873,
+          69.5445
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 35.5835,
+        "median_allocations": 115.001,
+        "min_us": 33.7995,
+        "max_us": 41.1955,
+        "sample_us": [
+          33.7995,
+          35.5835,
+          41.1955,
+          35.7025,
+          35.0475,
+          37.181,
+          35.424
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 35.95,
+        "median_allocations": 141.001,
+        "min_us": 34.597,
+        "max_us": 37.664,
+        "sample_us": [
+          37.664,
+          35.95,
+          35.5265,
+          35.34,
+          34.597,
+          36.0605,
+          36.405
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 13.199,
+        "median_allocations": 49.0005,
+        "min_us": 12.9525,
+        "max_us": 13.874,
+        "sample_us": [
+          13.097,
+          13.6615,
+          13.874,
+          13.124,
+          13.199,
+          13.7995,
+          12.9525
+        ]
+      }
+    ]
+  },
+  "focused-after": {
+    "format_version": 1,
+    "metadata": {
+      "recorded_at": "2026-10-31T15:40:58Z",
+      "ruby": "ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [arm64-darwin25]",
+      "platform": "arm64-darwin25",
+      "host_cpu": "arm64",
+      "yjit": false,
+      "gems": {
+        "sequel": "5.109.0",
+        "turso_libsql": "0.2.0",
+        "ffi": "1.17.4",
+        "sqlite3": "2.10.2"
+      },
+      "sqlite_version": "3.45.1",
+      "journal_mode": "memory",
+      "synchronous": 1,
+      "adapter_source_sha256": "d0353b81ff3b8941c8d655633fe8e0c5cd04218ee07fbc4542a9a6d90804a430",
+      "harness_sha256": "c2b0a6afc68d90c16f295e1173e2e2e42e63c331c3fac3725466233ab685d119"
+    },
+    "config": {
+      "adapter": "libsql",
+      "storage": "memory",
+      "iterations": 2000,
+      "warmup": 100,
+      "samples": 7,
+      "rows": 1000,
+      "batch": 20,
+      "workers": 4,
+      "seed": 42,
+      "filter": "^(read\\.(chain|reused_dataset|missing|scalar|prepared|bound_call|bound_values)|native\\.bound_query)$",
+      "output": "tmp/performance/focused-after.json"
+    },
+    "results": [
+      {
+        "name": "read.chain",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 52.777,
+        "median_allocations": 153.0005,
+        "min_us": 50.567,
+        "max_us": 56.2225,
+        "sample_us": [
+          54.178,
+          52.777,
+          56.2225,
+          53.203,
+          50.567,
+          52.7475,
+          51.546
+        ]
+      },
+      {
+        "name": "read.reused_dataset",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 26.95,
+        "median_allocations": 78.0005,
+        "min_us": 25.801,
+        "max_us": 27.3975,
+        "sample_us": [
+          27.3975,
+          27.012,
+          25.801,
+          26.95,
+          27.147,
+          26.126,
+          26.513
+        ]
+      },
+      {
+        "name": "read.scalar",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 22.8685,
+        "median_allocations": 67.001,
+        "min_us": 21.542,
+        "max_us": 23.6695,
+        "sample_us": [
+          23.547,
+          23.6695,
+          22.312,
+          21.542,
+          22.8685,
+          22.2305,
+          22.9415
+        ]
+      },
+      {
+        "name": "read.missing",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 37.665,
+        "median_allocations": 117.0005,
+        "min_us": 36.548,
+        "max_us": 41.2455,
+        "sample_us": [
+          41.2455,
+          40.111,
+          37.665,
+          38.2995,
+          36.7135,
+          36.6945,
+          36.548
+        ]
+      },
+      {
+        "name": "read.bound_call",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 73.249,
+        "median_allocations": 258.0005,
+        "min_us": 70.8335,
+        "max_us": 75.733,
+        "sample_us": [
+          73.5475,
+          71.454,
+          75.733,
+          73.249,
+          70.8335,
+          73.367,
+          72.5185
+        ]
+      },
+      {
+        "name": "read.prepared",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.151,
+        "median_allocations": 107.001,
+        "min_us": 32.5725,
+        "max_us": 36.368,
+        "sample_us": [
+          34.3625,
+          36.368,
+          32.5725,
+          32.788,
+          34.0415,
+          34.151,
+          34.3485
+        ]
+      },
+      {
+        "name": "read.bound_values",
+        "kind": "read",
+        "units_per_iteration": 1,
+        "median_us": 34.9465,
+        "median_allocations": 130.001,
+        "min_us": 33.456,
+        "max_us": 46.559,
+        "sample_us": [
+          34.5565,
+          36.016,
+          35.3755,
+          46.559,
+          34.9465,
+          33.456,
+          34.4755
+        ]
+      },
+      {
+        "name": "native.bound_query",
+        "kind": "native",
+        "units_per_iteration": 1,
+        "median_us": 12.613,
+        "median_allocations": 40.0005,
+        "min_us": 11.955,
+        "max_us": 13.187,
+        "sample_us": [
+          13.187,
+          12.075,
+          12.761,
+          11.955,
+          12.0475,
+          12.6605,
+          12.613
+        ]
+      }
+    ]
+  }
+}

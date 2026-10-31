@@ -27,13 +27,18 @@ module Sequel
         execute(sql) do |result|
           columns = result.columns.map{|column| output_identifier(column)}
           types = ResultTypes.new(self).for_columns(columns)
+          column_types = columns.map{|name| types[name]}
+          column_count = columns.length
           converter = TypeConverter.new(db)
           self.columns = columns
           result.each do |values|
             row = {}
-            columns.each_with_index do |name, index|
+            index = 0
+            while index < column_count
               value = values[index]
-              row[name] = converter.call(value, types[name])
+              type = column_types[index]
+              row[columns[index]] = type ? converter.call(value, type) : value
+              index += 1
             end
             yield row
           end

@@ -51,11 +51,21 @@ The fixture needs a free localhost port 8080. It creates a temporary SQLite file
 
 For a disposable hosted database, export `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN`, then run `bundle exec rake remote`. Tests create randomly named tables and drop only those tables. Do not point destructive integration fixtures from another project at a production database.
 
+## Performance benchmarks
+
+See [`test/performance/README.md`](../test/performance/README.md) for the standalone
+local native benchmark suite and [`results.md`](../test/performance/results.md)
+for measured optimization results. `bundle exec rake performance:smoke` checks all
+workloads with small fixtures on libSQL memory/file databases and a SQLite file
+database. `bundle exec rake performance` runs the measured memory suite; use the
+runner directly for file mode, filtering, longer samples, and JSON output.
+Benchmarks are opt-in and do not impose noisy wall-clock thresholds on `rake check`.
+
 ## Packaging
 
 ```sh
 mkdir -p pkg
-gem build libsql-sequel.gemspec --output pkg/libsql-sequel-0.3.0.gem
+gem build libsql-sequel.gemspec --output pkg/libsql-sequel-0.3.1.gem
 ```
 
 The explicit gem file list includes Ruby library files, public docs, examples, README, and LICENSE. It excludes private notes, cloned repositories, credentials, tests, and temporary databases. Nothing is automatically published.

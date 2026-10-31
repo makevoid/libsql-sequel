@@ -11,6 +11,11 @@ module Sequel
     module Native
       class Error < StandardError; end
 
+      # Hoist Bignum arithmetic out of the per-cell decode and bind paths.
+      INTEGER_MIN = -(1 << 63)
+      INTEGER_LIMIT = 1 << 63
+      INTEGER_MODULUS = 1 << 64
+
       extend FFI::Library
       ffi_lib(*CLibsql.ffi_libraries.map(&:name))
 
@@ -47,7 +52,9 @@ module Sequel
       end
 
       def self.string(value)
-        value = value.to_s.encode(Encoding::UTF_8)
+        value = value.to_s
+        # Keep a stable copy of mutable input while native calls release the GVL.
+        value = value.encode(Encoding::UTF_8) unless value.frozen? && value.encoding == Encoding::UTF_8
         raise Sequel::Error, 'libSQL text cannot contain NUL bytes; use Sequel.blob for binary data' if value.include?("\0")
         raise Sequel::Error, 'libSQL text must be valid UTF-8' unless value.valid_encoding?
         value
@@ -69,17 +76,17 @@ module Sequel
       end
 
       def self.value(value)
-        case value[:type]
+        case type = value[:type]
         when :null
           nil
         when :integer
           # The Ruby driver declares uint64, while the C API returns int64.
           integer = value[:value][:integer]
-          integer >= (1 << 63) ? integer - (1 << 64) : integer
+          integer >= INTEGER_LIMIT ? integer - INTEGER_MODULUS : integer
         when :real
           value[:value][:real]
         when :text, :blob
-          read_slice(value[:value][value[:type]], value[:type] == :text)
+          read_slice(value[:value][type], type == :text)
         else
           raise Error, 'unknown libSQL value type'
         end
@@ -91,7 +98,7 @@ module Sequel
         when nil
           yield CLibsql.libsql_null
         when Integer
-          unless (-(1 << 63)...(1 << 63)).cover?(value)
+          unless value >= INTEGER_MIN && value < INTEGER_LIMIT
             raise Sequel::Error, 'libSQL integers must fit in signed 64 bits'
           end
           yield CLibsql.libsql_integer(value)

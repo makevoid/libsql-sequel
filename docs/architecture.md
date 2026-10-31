@@ -34,6 +34,15 @@ Sequel's cached placeholder literalizer optimization is disabled because it repl
 
 Numeric timestamps follow Sequel's SQLite convention: Integer means Unix seconds and Float means Julian day. Numeric TIME values preserve microseconds. BLOB columns containing integer/real/text storage values convert through their string representation, and nonnumeric text in a decimal column remains text, matching Sequel's SQLite adapter.
 
+Result decoding resolves column types once per result, then uses an indexed loop
+to assemble row hashes, following Sequel's SQLite adapter. The native column count
+is also resolved once per iteration over a result. Signed-integer bounds are
+constants rather than repeated Bignum arithmetic per cell/bind. Native text input
+can reuse a frozen UTF-8 string; mutable strings are still copied before calls
+that release the GVL. These optimizations preserve per-row cleanup and schema
+invalidation; they introduce no statement or result-type cache. The local
+[performance suite](../test/performance/README.md) records timing and allocations.
+
 Sequel invalidates its own schema cache for schema DSL changes. External schema changes and arbitrary DDL via `run` follow Sequel's usual cache rules; reload the affected schema or reconnect the Database object when needed. No extra unbounded type cache is introduced.
 
 ## Driver boundary

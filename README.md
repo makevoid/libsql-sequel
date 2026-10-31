@@ -30,13 +30,13 @@ Install from [RubyGems](https://rubygems.org/gems/libsql-sequel):
 
 ```ruby
 # Gemfile
-gem 'libsql-sequel', '~> 0.3.0'
+gem 'libsql-sequel', '~> 0.3.1'
 ```
 
 Then run `bundle install`. To install without Bundler:
 
 ```sh
-gem install libsql-sequel -v 0.3.0
+gem install libsql-sequel -v 0.3.1
 ```
 
 Ruby 3.3+ and Sequel 5.80–5.x are required. The native dependency is **pinned to `turso_libsql` 0.2.0**: 0.2.1 contains native debug output of connection credentials and SQL. Do not widen that dependency without reviewing the replacement library. The adapter uses the bundled native library with scoped corrections for the driver's Ruby wrapper; it does not patch global `Libsql` classes or require `sqlite3` at runtime.
@@ -135,6 +135,7 @@ bundle exec rake lint          # syntax and method visibility only
 bundle exec rake test          # real native local/file databases
 bundle exec rake upstream      # upstream SQLite + integration specs
 bundle exec rake remote_local  # real native HTTP client, local Hrana server
+bundle exec rake performance   # local end-to-end timing and allocation benchmarks
 ```
 
 `upstream` and `remote_local` need the ignored reference checkouts; setup instructions are in [development.md](docs/development.md). `rake` defaults to `check`. Checks follow Sequel's own syntax/warnings/visibility approach; Sequel does not configure RuboCop or a complexity analyzer. See [the spec and code-quality review](docs/testing-review.md).
@@ -142,3 +143,8 @@ bundle exec rake remote_local  # real native HTTP client, local Hrana server
 For an explicit test against a **disposable** hosted database, set `LIBSQL_TEST_URL` and `LIBSQL_TEST_AUTH_TOKEN` in your environment, then run `bundle exec rake remote`. It creates randomly named test tables and drops those tables afterward. Hosted authentication and HTTPS remote operations have been validated with a `turso://` URL; embedded replication remains unverified. See [compatibility and verification](docs/compatibility.md) for the tested scope.
 
 See [architecture](docs/architecture.md), [compatibility](docs/compatibility.md), and [the local example](examples/local.rb).
+
+The [performance suite](test/performance/README.md) covers queries/chaining, bound
+and prepared operations, result decoding, CRUD, models, transactions, bulk writes,
+schema operations, and file-backed connection concurrency. It includes correctness
+checks, JSON before/after comparisons, and a Sequel SQLite reference mode.

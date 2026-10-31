@@ -132,12 +132,13 @@ module Sequel
 
       def each
         check_open
+        column_count = columns.length
         loop do
           check_open
           row = Native.check(Native.rows_next(@rows))
           break if row[:inner].null?
           begin
-            values = Array.new(columns.length) do |index|
+            values = Array.new(column_count) do |index|
               Native.value(Native.check(CLibsql.libsql_row_value(row, index))[:ok])
             end
             yield values

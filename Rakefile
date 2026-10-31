@@ -55,3 +55,19 @@ task :remote_local do
     'tmp/hrana-venv/bin/python', 'test/support/hrana_server.py',
     RbConfig.ruby, *RUBY_WARNING_FLAGS, *STRICT_BLOCK_WARNING_FLAGS, '-Ilib', 'test/remote.rb')
 end
+
+desc 'Benchmark embedded libSQL with correctness checks (options: ruby test/performance/run.rb --help)'
+task :performance do
+  ruby 'test/performance/run.rb'
+end
+
+namespace :performance do
+  desc 'Smoke-test all benchmark workloads on libSQL memory/file and SQLite file databases'
+  task :smoke do
+    [['libsql', 'memory'], ['libsql', 'file'], ['sqlite', 'file']].each do |adapter, storage|
+      ruby(*RUBY_WARNING_FLAGS, *STRICT_BLOCK_WARNING_FLAGS, 'test/performance/run.rb',
+        '--adapter', adapter, '--storage', storage, '--iterations', '2', '--warmup', '1',
+        '--samples', '1', '--rows', '20', '--batch', '2')
+    end
+  end
+end
