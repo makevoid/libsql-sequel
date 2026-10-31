@@ -16,9 +16,9 @@ The adapter follows Sequel's small Database/Dataset adapter pattern and delegate
 
 Each Sequel pool slot owns one native Database and Connection. A query owns its Statement, Result, and one Row at a time. Values are copied into Ruby before the row is freed. Native strings/blobs returned by the C API are copied and freed exactly once. Cleanup runs in reverse order on success, errors, early iteration exit, and connection setup failure. A result retained after its block raises rather than touching freed native memory.
 
-Potentially blocking initialization, prepare, execute, query, row advance, and sync calls release the Ruby GVL. Sequel serializes access to a given connection; independent pool slots can run concurrently. Memory and embedded-replica pools are restricted to one slot. Explicit `disconnect` closes both handles, is idempotent, and leaves Sequel able to reconnect lazily.
+Potentially blocking initialization, prepare, execute, query, row advance, and sync calls release the Ruby GVL. Sequel serializes access to a given connection; independent pool slots can run concurrently. Memory and embedded-replica pools are restricted to one slot. In the owning process, explicit `disconnect` closes both handles, is idempotent, and leaves Sequel able to reconnect lazily.
 
-There are no finalizers: explicit ownership avoids GC freeing a native parent while a child is in use. Application code must disconnect databases it no longer needs. Connections detect use from a different process and reject it. The upstream Rust runtime must be initialized in each worker after fork; this is not a fork-safe driver.
+There are no finalizers: explicit ownership avoids GC freeing a native parent while a child is in use. Application code must disconnect databases it no longer needs. Connections detect queries from a different process and reject them. In a child, `disconnect` only clears inherited references, allowing Sequel to empty its pool without calling unsafe native destructors or affecting the parent's connections. Release parent connections in `before_fork`. The upstream Rust runtime must be initialized in each worker after fork; disconnecting does not reset it, and this is not a fork-safe driver.
 
 ## Transactions and prepared queries
 

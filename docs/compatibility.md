@@ -22,7 +22,7 @@ Live embedded replication, sync scheduling/read-your-writes behavior against a p
 - Remote native SQL parsing rejects local PRAGMAs such as busy_timeout/case_sensitive_like. Remote LIKE behavior follows the server. Local-only options are rejected when a remote URL is configured.
 - No custom regexp functions, read-only opening, loadable extensions, DQS configuration, offline-write sync mode, or configurable HTTP timeout.
 - Memory/replica pools are limited to one connection. Disconnecting a memory database destroys it.
-- Initialize in worker processes after fork. Inherited native runtimes/connections are unsupported.
+- Initialize in worker processes after fork; release any parent connections in `before_fork`. Child `disconnect` quietly discards inherited handles, while inherited queries remain unsupported. This cleanup does not reset an inherited native runtime or establish that reconnecting in the child is safe.
 - No automatic retry or idempotency policy for transport failures. If a write response is lost, its outcome can be uncertain.
 - `turso_libsql` 0.2.0 ships only Apple Silicon macOS and glibc Linux x86_64/aarch64 binaries. Other platforms need an independently validated driver build.
 - This targets libSQL and Turso's libSQL-compatible service, not the separate newer `turso` Rust engine API.

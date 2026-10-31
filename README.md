@@ -70,7 +70,9 @@ db.sync # => {frame_no: ..., frames_synced: ...}
 
 `url:` can also specify the remote URL; `database:` or `path:` then names the local replica. Memory databases and replicas require `max_connections: 1`. This avoids separate memory databases and multiple replication workers targeting one file. Replica sync cannot run inside a transaction. Embedded replication is implemented but has not been tested against a live Turso primary.
 
-Keep tokens in the `auth_token:` option rather than the URL. URLs with credentials, query parameters, or fragments are rejected. Create and disconnect connections within each worker process; do not preload the native runtime before forking.
+Keep tokens in the `auth_token:` option rather than the URL. URLs with credentials, query parameters, or fragments are rejected.
+
+For Puma and other forking servers, initialize native connections inside each worker after forking. If the parent has opened connections, call `DB.disconnect` in `before_fork` to release them in their owning process. Calling `DB.disconnect` in a child quietly discards inherited handles without invoking native destructors; inherited queries still raise `Sequel::Error`. Disconnecting does not reset an already initialized Rust runtime, so child cleanup alone does not make preloading the native runtime safe.
 
 Local connections enable foreign keys, case-sensitive `LIKE`, and a 5,000 ms SQLite busy timeout by default. `timeout:`, `case_sensitive_like:`, `auto_vacuum:`, `synchronous:`, and `temp_store:` are local-only options. The native remote parser rejects those PRAGMAs; remote connections keep the server's `LIKE` behavior. `timeout:` is a SQLite lock timeout, not an HTTP timeout. `readonly:`, custom regexp functions, `disable_dqs:`, offline-write mode, and custom TLS options are unsupported and rejected.
 

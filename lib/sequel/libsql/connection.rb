@@ -63,7 +63,12 @@ module Sequel
       end
 
       def close
-        check_process
+        # Inherited handles belong to the parent; their runtime cannot be used
+        # or destroyed in the child. Let Sequel empty the child's pool safely.
+        if @pid != Process.pid
+          @connection = @database = @strings = nil
+          return
+        end
         if @connection
           CLibsql.libsql_connection_deinit(@connection)
           @connection = nil
